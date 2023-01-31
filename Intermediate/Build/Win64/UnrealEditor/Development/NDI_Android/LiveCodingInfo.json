@@ -1,0 +1,11 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.NDI_Android.cpp.obj": [
+			"NDI_Android.init.gen.cpp.obj",
+			"NDI_AndroidBPLibrary.gen.cpp.obj",
+			"NDI_Android.cpp.obj",
+			"NDI_AndroidBPLibrary.cpp.obj"
+		]
+	}
+}
