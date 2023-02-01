@@ -127,7 +127,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Release(FString& OutCode, UPARAM(
 
 void UNDI_AndroidBPLibrary::NDI_Android_Source_Infos(FString& SourceName, FString& SourceURL, FString& SourceIP, UNDI_Android_Found* InFound, int32 SourceIndex)
 {
-	//SourceIP = InFound->NDI_Source_Founds[SourceIndex].p_ip_address;
+	SourceIP = InFound->NDI_Source_Founds[SourceIndex].p_ip_address;
 	SourceName = InFound->NDI_Source_Founds[SourceIndex].p_ndi_name;
 	SourceURL = InFound->NDI_Source_Founds[SourceIndex].p_url_address;
 }
@@ -342,13 +342,14 @@ void UNDI_AndroidBPLibrary::NDI_Android_Receive(FDelegateReceived DelegateReceiv
 		return;
 	}
 	
-	NDIlib_recv_create_t NDI_Receiver_Settings;
+	NDIlib_recv_create_v3_t NDI_Receiver_Settings;
 	NDI_Receiver_Settings.allow_video_fields = false;
 	NDI_Receiver_Settings.bandwidth = NDIlib_recv_bandwidth_highest;
 	NDI_Receiver_Settings.color_format = NDIlib_recv_color_format_BGRX_BGRA;
+	NDI_Receiver_Settings.p_ndi_recv_name = InFound->NDI_Source_Founds[SourceIndex].p_ndi_name;
 	NDI_Receiver_Settings.source_to_connect_to = InFound->NDI_Source_Founds[SourceIndex];
 
-	NDIlib_recv_instance_t NDI_Receiver_Inst = NDIlib_recv_create_v2(&NDI_Receiver_Settings);
+	NDIlib_recv_instance_t NDI_Receiver_Inst = NDIlib_recv_create_v4(&NDI_Receiver_Settings);
 	NDIlib_recv_connect(NDI_Receiver_Inst, &InFound->NDI_Source_Founds[SourceIndex]);
 
 	NDIlib_video_frame_v2_t Frame_Video;
