@@ -51,11 +51,10 @@
             "d:\\epic\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\texturerendertarget.generated.h",
             "d:\\epic\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\texturerendertarget2d.generated.h",
             "d:\\epic\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetrenderinglibrary.generated.h",
-            "d:\\epic\\engines\\ue_5.1\\engine\\source\\runtime\\imagewrapper\\public\\iimagewrappermodule.h",
-            "d:\\epic\\engines\\ue_5.1\\engine\\source\\runtime\\imagewrapper\\public\\iimagewrapper.h",
             "c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.33.31629\\include\\chrono",
             "c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.33.31629\\include\\__msvc_chrono.hpp",
-            "c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.33.31629\\include\\ratio"
+            "c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.33.31629\\include\\ratio",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22000.0\\ucrt\\assert.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
