@@ -52,9 +52,6 @@ public class NDI_Android : ModuleRules
 				"Slate",
 				"SlateCore",
                 "Projects",
-                "MediaUtils",
-                "MediaAssets"
-				
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
