@@ -51,7 +51,7 @@ public class NDI_Android : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "Projects",
+                "Projects"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -43,7 +43,7 @@
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Slate\UnrealEditor-Slate.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\SlateCore\UnrealEditor-SlateCore.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Projects\UnrealEditor-Projects.lib"
-"..\Intermediate\Build\Win64\UnrealEditor\Development\MediaUtils\UnrealEditor-MediaUtils.lib"
+"..\Plugins\Media\MediaIOFramework\Intermediate\Build\Win64\UnrealEditor\Development\MediaIOCore\UnrealEditor-MediaIOCore.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\MediaAssets\UnrealEditor-MediaAssets.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
 "delayimp.lib"

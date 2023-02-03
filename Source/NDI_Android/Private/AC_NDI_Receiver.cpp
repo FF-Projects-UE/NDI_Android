@@ -66,6 +66,13 @@ bool UAC_NDI_Receiver::Create_Receiver()
 	NDI_Receiver_Settings.source_to_connect_to = this->NDI_Found->NDI_Source_Founds[this->Source_Index];
 
 	NDIlib_recv_instance_t NDI_Receiver_Inst = NDIlib_recv_create_v4(&NDI_Receiver_Settings);
+
+	if (!NDI_Receiver_Inst)
+	{
+		NDIlib_recv_destroy(NDI_Receiver_Inst);
+		return false;
+	}
+
 	NDIlib_recv_connect(NDI_Receiver_Inst, &this->NDI_Found->NDI_Source_Founds[this->Source_Index]);
 
 	this->NDI_Receiver = NDI_Receiver_Inst;
@@ -81,35 +88,80 @@ bool UAC_NDI_Receiver::Receive_Frames()
 		return false;
 	}
 	
-	NDIlib_video_frame_v2_t Frame_Video;
-	NDIlib_recv_capture_v3(this->NDI_Receiver, &Frame_Video, NULL, nullptr, 200);
+	NDIlib_video_frame_v2_t Frame_Received;
+	NDIlib_recv_capture_v3(this->NDI_Receiver, &Frame_Received, NULL, nullptr, 1000);
 
-	if (Frame_Video.data_size_in_bytes > 0)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(Frame_Video.data_size_in_bytes));
+	if (Frame_Received.data_size_in_bytes > 0)
+	{		
+		if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVA)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "UYVA");
+			
+			return false;
+		}
 		
-		UTexture2D* Video_Frame_Texture = UTexture2D::CreateTransient(Frame_Video.xres, Frame_Video.yres, PF_B8G8R8A8);
-		Video_Frame_Texture->SRGB = 0;
-		FTexture2DMipMap& Mip = Video_Frame_Texture->GetPlatformData()->Mips[0];
-		void* Data = Mip.BulkData.Lock(LOCK_READ_WRITE);
+		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVY)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "UYVY");
+			
+			return false;
+		}
 
-		FMemory::Memcpy(Data, Frame_Video.p_data, Frame_Video.data_size_in_bytes);
-		Mip.BulkData.Unlock();
-		Video_Frame_Texture->UpdateResource();
+		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_YV12)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "YV12");
+			
+			return false;
+		}
 
-		NDIlib_recv_free_video_v2(this->NDI_Receiver, &Frame_Video);
+		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRA)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "BGRA");
 
-		this->Received_Frame = Video_Frame_Texture;
+			UTexture2D* Frame_Texture = UTexture2D::CreateTransient(Frame_Received.xres, Frame_Received.yres, PF_B8G8R8A8);
+			Frame_Texture->SRGB = 0;
+			FTexture2DMipMap& Frame_Mip = Frame_Texture->GetPlatformData()->Mips[0];
+			void* Frame_Texture_Data = Frame_Mip.BulkData.Lock(LOCK_READ_WRITE);
 
-		return true;
+			FMemory::Memcpy(Frame_Texture_Data, Frame_Received.p_data, static_cast<SIZE_T>(Frame_Received.line_stride_in_bytes) * Frame_Received.yres);
+			Frame_Mip.BulkData.Unlock();
+			Frame_Texture->UpdateResource();
+
+			NDIlib_recv_free_video_v2(this->NDI_Receiver, &Frame_Received);
+
+			this->Received_Frame = Frame_Texture;
+
+			return true;
+		}
+		
+		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRX)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "BGRX");
+			UTexture2D* Frame_Texture = UTexture2D::CreateTransient(Frame_Received.xres, Frame_Received.yres, PF_B8G8R8A8);
+			Frame_Texture->SRGB = 0;
+			FTexture2DMipMap& Frame_Mip = Frame_Texture->GetPlatformData()->Mips[0];
+			void* Frame_Texture_Data = Frame_Mip.BulkData.Lock(LOCK_READ_WRITE);
+
+			FMemory::Memcpy(Frame_Texture_Data, Frame_Received.p_data, static_cast<SIZE_T>(Frame_Received.line_stride_in_bytes) * Frame_Received.yres);
+			Frame_Mip.BulkData.Unlock();
+			Frame_Texture->UpdateResource();
+
+			NDIlib_recv_free_video_v2(this->NDI_Receiver, &Frame_Received);
+
+			this->Received_Frame = Frame_Texture;
+
+			return true;
+		}
 	}
 
 	else
 	{
-		NDIlib_recv_free_video_v2(this->NDI_Receiver, &Frame_Video);
+		NDIlib_recv_free_video_v2(this->NDI_Receiver, &Frame_Received);
 
 		return false;
 	}
+
+	return true;
 }
 
 void UAC_NDI_Receiver::NDI_Android_Receive_Stop()

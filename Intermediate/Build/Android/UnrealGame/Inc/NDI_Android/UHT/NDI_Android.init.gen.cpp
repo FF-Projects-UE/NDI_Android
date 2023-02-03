@@ -7,23 +7,29 @@
 #include "UObject/GeneratedCppIncludes.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNDI_Android_init() {}
+	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_DelegateNdiFound__DelegateSignature();
+	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_DelegateReceived__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_NDI_Android;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_NDI_Android()
 	{
 		if (!Z_Registration_Info_UPackage__Script_NDI_Android.OuterSingleton)
 		{
+			static UObject* (*const SingletonFuncArray[])() = {
+				(UObject* (*)())Z_Construct_UDelegateFunction_NDI_Android_DelegateNdiFound__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_NDI_Android_DelegateReceived__DelegateSignature,
+			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/NDI_Android",
-				nullptr,
-				0,
+				SingletonFuncArray,
+				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x9CB8766E,
-				0xD3008EB7,
+				0x522D38C1,
+				0x0BE58287,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_NDI_Android.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_NDI_Android.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NDI_Android(Z_Construct_UPackage__Script_NDI_Android, TEXT("/Script/NDI_Android"), Z_Registration_Info_UPackage__Script_NDI_Android, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x9CB8766E, 0xD3008EB7));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NDI_Android(Z_Construct_UPackage__Script_NDI_Android, TEXT("/Script/NDI_Android"), Z_Registration_Info_UPackage__Script_NDI_Android, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x522D38C1, 0x0BE58287));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

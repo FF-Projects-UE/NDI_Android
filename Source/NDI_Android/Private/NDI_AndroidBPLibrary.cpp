@@ -7,6 +7,10 @@
 #include "Kismet/KismetRenderingLibrary.h"
 
 THIRD_PARTY_INCLUDES_START
+#ifdef __ANDROID__
+#include <jni.h>
+#include <stdio.h>
+#endif
 THIRD_PARTY_INCLUDES_END
 
 UNDI_AndroidBPLibrary::UNDI_AndroidBPLibrary(const FObjectInitializer& ObjectInitializer)
