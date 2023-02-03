@@ -19,12 +19,6 @@
 * Get "Received_Frame (UTexture2D)" from "AC_NDI_Receiver" actor component at "Event Tick" or "Set Timer by Event".
 * Use it as you like.
 
-## Disclaimer
-* Android 12 requires additional NSD (Network Service Discovery) in order to be seen on NDI receivers. This requires JNI and Java knowledge which we don't have.
-* So, you have two choice.
-	* Buy NDI Camera app from app store and just open it. Put it background and use your Unreal app as its UI.
-	* You can wait that we finish flutter based NSD service app.
-
 ## Limitations
 * C++ functions and blueprint samples have been finished.
 * But Android requires NSD (Network Service Discovery) for send and receive sources.
