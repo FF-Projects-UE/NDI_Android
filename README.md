@@ -20,14 +20,13 @@
 * Use it as you like.
 
 ## Limitations
-* C++ functions and blueprint samples have been finished.
-* But Android requires NSD (Network Service Discovery) for send and receive sources.
-NDI SDK doesn't and C++ don't have this feature and should be done with Java JNI. Currently we don't have required Java knowledge for that but we are working to move around of it.
+* C++ functions and blueprint samples have been finished. But Android requires NSD (Network Service Discovery) for send and receive sources.
+NDI SDK and C++ don't have this feature and should be done with Java JNI. Currently we don't have required Java knowledge for that but we are working to move around of it.
 
 ## Work-In-Progress
 * NSD Service for send and receive (We will create a flutter app)
 
-## Move Around Solution for Sending
+## Temporary Solution for Sending
 * If you have NDI HX Camera app from Google Playstore, just open it and put it background. Don't broadcast.
 * Open your Unreal based mobile application and stream it. It will use NDI HX's network discovery service.
 * You can think that your Unreal app will be new UI for NDI HX Camera.
