@@ -24,6 +24,8 @@ public class NDI_Android : ModuleRules
 
         if (UnrealTargetPlatform.Android == Target.Platform)
         {
+            PrivateDependencyModuleNames.Add("Launch");
+
             string Location_NDI = "../Source/NDI_Android/ThirdParty/NDI/Android/include";
             PrivateIncludePaths.Add(Location_NDI);
 

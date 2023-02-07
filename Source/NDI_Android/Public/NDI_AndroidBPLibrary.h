@@ -7,6 +7,15 @@
 // NDI Includes.
 #include <Processing.NDI.Advanced.h>
 
+// Android Includes
+#ifdef __ANDROID__
+#include "Android/AndroidJNI.h"
+#include "Android/AndroidJavaEnv.h"
+#include "Android/AndroidApplication.h"
+#include "Android/AndroidPlatformProcess.h"
+#include "Android/AndroidPlatform.h"
+#endif
+
 #include "NDI_AndroidBPLibrary.generated.h"
 
 UCLASS(BlueprintType)

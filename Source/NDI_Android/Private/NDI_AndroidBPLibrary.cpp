@@ -7,10 +7,6 @@
 #include "Kismet/KismetRenderingLibrary.h"
 
 THIRD_PARTY_INCLUDES_START
-#ifdef __ANDROID__
-#include <jni.h>
-#include <stdio.h>
-#endif
 THIRD_PARTY_INCLUDES_END
 
 UNDI_AndroidBPLibrary::UNDI_AndroidBPLibrary(const FObjectInitializer& ObjectInitializer)
@@ -45,7 +41,40 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Release()
 }
 
 bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream)
-{
+{	
+#ifdef __ANDROID__
+
+	//JNIEnv* env = FAndroidApplication::GetJavaEnv();
+	JNIEnv* env = AndroidJavaEnv::GetJavaEnv();
+
+	if (env == nullptr)
+	{
+		OutCode = "Unable to get Java environment.";
+		return false;
+	}
+
+	jclass PluginClass = AndroidJavaEnv::FindJavaClassGlobalRef("com/epicgames/unreal/GameActivity$NDI_NSD_Service");
+
+	if (PluginClass == nullptr)
+	{
+		OutCode = "Unable to find NDI_NSD_Service Java Class.";
+		return false;
+	}
+
+	jmethodID MethodID = FJavaWrapper::FindMethod(env, PluginClass, "registerService", "(Ljava/lang/String;)V", false);
+
+	if (MethodID == nullptr)
+	{
+		OutCode = "Unable to find registerService Java method in NDI_NSD_Service Java class.";
+		return false;
+	}
+
+	jstring ServiceName = env->NewStringUTF(TCHAR_TO_UTF8(*In_Name_Stream));
+
+	env->CallStaticVoidMethod(PluginClass, MethodID, ServiceName);
+
+#endif
+
 	// p_ndi_name doesn't work with std::string(TCHAR_TO_UTF8(*In_Name_Stream));
 	std::string Name_Stream = std::string(TCHAR_TO_UTF8(*In_Name_Stream));
 
