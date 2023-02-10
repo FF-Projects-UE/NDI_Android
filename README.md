@@ -1,7 +1,7 @@
 # NDI_Android
 
 ## Dependency
-* (Android )Use https://github.com/gtreshchev/AndroidNative to call NSD service starter with JNI or implement your own method.
+* (Android) Use https://github.com/gtreshchev/AndroidNative to call NSD service starter with JNI or implement your own method.
 
 ## Java Code for NSD
 * Add this imports to your Java file
