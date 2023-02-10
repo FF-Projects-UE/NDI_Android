@@ -10,13 +10,16 @@
 	</init>
 
 	<androidManifestUpdates>
-		<!-- Add permissions -->
-		<addPermission android:name="android.permission.INTERNET" />
-		<addPermission android:name="android.permission.ACCESS_WIFI_STATE" />
-		<addPermission android:name="android.permission.CHANGE_WIFI_STATE" />
-		<addPermission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+		<if condition="bCpuArchSupported">
+			<true>
+				<uses-feature android:name="android.hardware.camera"/>
+				<uses-feature android:name="android.hardware.camera.autofocus"/>
+				
+				<addPermission android:name="android.permission.CAMERA"/>
+			</true>
+		</if>
 	</androidManifestUpdates>
-
+	
 	<resourceCopies>
 		<if condition="bCpuArchSupported">
 			<true>
@@ -26,63 +29,6 @@
 			</true>
 		</if>
 	</resourceCopies>
-
-	<gameActivityImportAdditions>
-		<insert>
-			import android.os.IBinder;
-			import android.app.Service;
-			import android.net.nsd.NsdManager;
-			import android.net.nsd.NsdServiceInfo;
-		</insert>
-	</gameActivityImportAdditions>
-
-	<gameActivityClassAdditions>
-		<insert>
-			public class NDI_NSD_Service
-			{
-			private NsdManager nsdManager;
-			private NsdServiceInfo nsdServiceInfo;
-			private NsdManager.RegistrationListener listener;
-
-			public void registerService(String ServiceName)
-			{
-			this.nsdManager = (NsdManager)Get().getApplicationContext().getSystemService(Context.NSD_SERVICE);
-
-			this.nsdServiceInfo = new NsdServiceInfo();
-			this.nsdServiceInfo.setServiceName(ServiceName);
-			this.nsdServiceInfo.setServiceType("_example._tcp");
-			this.nsdServiceInfo.setPort(5960);
-
-			this.nsdManager.registerService(this.nsdServiceInfo, NsdManager.PROTOCOL_DNS_SD, new NsdManager.RegistrationListener()
-			{
-			@Override
-			public void onRegistrationFailed(NsdServiceInfo nsdServiceInfo, int i)
-			{
-
-			}
-
-			@Override
-			public void onUnregistrationFailed(NsdServiceInfo nsdServiceInfo, int i)
-			{
-
-			}
-
-			@Override
-			public void onServiceRegistered(NsdServiceInfo nsdServiceInfo)
-			{
-
-			}
-
-			@Override
-			public void onServiceUnregistered(NsdServiceInfo nsdServiceInfo)
-			{
-
-			}
-			});
-			}
-			}
-		</insert>
-	</gameActivityClassAdditions>
 	
 	<!-- optional libraries to load in GameActivity.java before libUnreal.so -->
 	<soLoadLibrary>

@@ -27,10 +27,12 @@ void FNDI_AndroidModule::StartupModule()
 
 void FNDI_AndroidModule::ShutdownModule()
 {
+
 #ifdef _WIN64
 	FPlatformProcess::FreeDllHandle(NDI_Android_Handle);
 	NDI_Android_Handle = nullptr;
 #endif
+
 }
 
 #undef LOCTEXT_NAMESPACE

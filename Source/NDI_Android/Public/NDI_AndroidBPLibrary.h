@@ -7,15 +7,6 @@
 // NDI Includes.
 #include <Processing.NDI.Advanced.h>
 
-// Android Includes
-#ifdef __ANDROID__
-#include "Android/AndroidJNI.h"
-#include "Android/AndroidJavaEnv.h"
-#include "Android/AndroidApplication.h"
-#include "Android/AndroidPlatformProcess.h"
-#include "Android/AndroidPlatform.h"
-#endif
-
 #include "NDI_AndroidBPLibrary.generated.h"
 
 UCLASS(BlueprintType)
@@ -50,7 +41,7 @@ UCLASS()
 class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
-
+	
 	/**
 	* Return -1 is "CPU doesn't support NDI"
 	* Return 0 is "Unable to initialize NDIlib"
@@ -65,8 +56,11 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "NDI Android Source Infos", Keywords = "ndi, android, source, infos"), Category = "NDI_Android|System")
 	static void NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* InFound, int32 SourceIndex);
 
+	/**
+	* @param In_Port use 1522 or 5960
+	*/
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Create Sender", Keywords = "ndi, android, sender, create"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream);
+	static bool NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream = "UE5_Android_NDI", int32 In_Port = 1522);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Sender", Keywords = "ndi, android, sender, release"), Category = "NDI_Android|Send")
 	static bool NDI_Android_Sender_Release(FString& OutCode, UPARAM(ref)UNDI_Android_Sender*& NDI_Sender);

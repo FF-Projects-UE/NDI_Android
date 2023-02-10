@@ -15,6 +15,7 @@ UNDI_AndroidBPLibrary::UNDI_AndroidBPLibrary(const FObjectInitializer& ObjectIni
 
 }
 
+
 int32 UNDI_AndroidBPLibrary::NDI_Android_Init(FString& OutCode)
 {
 	if (NDIlib_is_supported_CPU() == false)
@@ -40,41 +41,8 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Release()
 	return true;
 }
 
-bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream)
+bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream, int32 In_Port)
 {	
-#ifdef __ANDROID__
-
-	//JNIEnv* env = FAndroidApplication::GetJavaEnv();
-	JNIEnv* env = AndroidJavaEnv::GetJavaEnv();
-
-	if (env == nullptr)
-	{
-		OutCode = "Unable to get Java environment.";
-		return false;
-	}
-
-	jclass PluginClass = AndroidJavaEnv::FindJavaClassGlobalRef("com/epicgames/unreal/GameActivity$NDI_NSD_Service");
-
-	if (PluginClass == nullptr)
-	{
-		OutCode = "Unable to find NDI_NSD_Service Java Class.";
-		return false;
-	}
-
-	jmethodID MethodID = FJavaWrapper::FindMethod(env, PluginClass, "registerService", "(Ljava/lang/String;)V", false);
-
-	if (MethodID == nullptr)
-	{
-		OutCode = "Unable to find registerService Java method in NDI_NSD_Service Java class.";
-		return false;
-	}
-
-	jstring ServiceName = env->NewStringUTF(TCHAR_TO_UTF8(*In_Name_Stream));
-
-	env->CallStaticVoidMethod(PluginClass, MethodID, ServiceName);
-
-#endif
-
 	// p_ndi_name doesn't work with std::string(TCHAR_TO_UTF8(*In_Name_Stream));
 	std::string Name_Stream = std::string(TCHAR_TO_UTF8(*In_Name_Stream));
 

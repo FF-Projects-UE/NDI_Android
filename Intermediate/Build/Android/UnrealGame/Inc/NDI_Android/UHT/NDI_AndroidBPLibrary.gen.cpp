@@ -247,9 +247,10 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_OutCode);
 		P_GET_OBJECT_REF(UNDI_Android_Sender,Z_Param_Out_Out_NDI_Sender);
 		P_GET_PROPERTY(FStrProperty,Z_Param_In_Name_Stream);
+		P_GET_PROPERTY(FIntProperty,Z_Param_In_Port);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(Z_Param_Out_OutCode,Z_Param_Out_Out_NDI_Sender,Z_Param_In_Name_Stream);
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(Z_Param_Out_OutCode,Z_Param_Out_Out_NDI_Sender,Z_Param_In_Name_Stream,Z_Param_In_Port);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_Source_Infos)
@@ -535,11 +536,13 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 			FString OutCode;
 			UNDI_Android_Sender* Out_NDI_Sender;
 			FString In_Name_Stream;
+			int32 In_Port;
 			bool ReturnValue;
 		};
 		static const UECodeGen_Private::FStrPropertyParams NewProp_OutCode;
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_NDI_Sender;
 		static const UECodeGen_Private::FStrPropertyParams NewProp_In_Name_Stream;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_In_Port;
 		static void NewProp_ReturnValue_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -551,6 +554,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_OutCode = { "OutCode", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms, OutCode), METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_Out_NDI_Sender = { "Out_NDI_Sender", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms, Out_NDI_Sender), Z_Construct_UClass_UNDI_Android_Sender_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_In_Name_Stream = { "In_Name_Stream", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms, In_Name_Stream), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_In_Port = { "In_Port", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms, In_Port), METADATA_PARAMS(nullptr, 0) };
 	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
 		((NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms*)Obj)->ReturnValue = 1;
@@ -560,14 +564,19 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_OutCode,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_Out_NDI_Sender,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_In_Name_Stream,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_In_Port,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::Function_MetaDataParams[] = {
 		{ "Category", "NDI_Android|Send" },
+		{ "Comment", "/**\n\x09* @param In_Port use 1522 or 5960\n\x09*/" },
+		{ "CPP_Default_In_Name_Stream", "UE5_Android_NDI" },
+		{ "CPP_Default_In_Port", "1522" },
 		{ "DisplayName", "NDI Android Create Sender" },
 		{ "Keywords", "ndi, android, sender, create" },
 		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+		{ "ToolTip", "@param In_Port use 1522 or 5960" },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_Sender_Create", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::NDI_AndroidBPLibrary_eventNDI_Android_Sender_Create_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create_Statics::Function_MetaDataParams)) };
@@ -704,7 +713,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Release, "NDI_Android_Release" }, // 2380939505
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Send_T2D, "NDI_Android_Send_T2D" }, // 3920492334
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Send_TRT2D, "NDI_Android_Send_TRT2D" }, // 511194355
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create, "NDI_Android_Sender_Create" }, // 1079334484
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create, "NDI_Android_Sender_Create" }, // 2589184344
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Release, "NDI_Android_Sender_Release" }, // 982061464
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Source_Infos, "NDI_Android_Source_Infos" }, // 246864041
 	};
@@ -753,9 +762,9 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UNDI_Android_Sender, UNDI_Android_Sender::StaticClass, TEXT("UNDI_Android_Sender"), &Z_Registration_Info_UClass_UNDI_Android_Sender, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Sender), 174056774U) },
 		{ Z_Construct_UClass_UNDI_Android_Found, UNDI_Android_Found::StaticClass, TEXT("UNDI_Android_Found"), &Z_Registration_Info_UClass_UNDI_Android_Found, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Found), 3038918707U) },
-		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 4217221093U) },
+		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 3063556634U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_615620651(TEXT("/Script/NDI_Android"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_926881615(TEXT("/Script/NDI_Android"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

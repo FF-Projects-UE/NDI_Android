@@ -62,6 +62,20 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 		}
 		return ReturnFunction;
 	}
+	DEFINE_FUNCTION(UAC_NDI_Receiver::execCreate_Receiver)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->Create_Receiver();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UAC_NDI_Receiver::execReceive_Frames)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->Receive_Frames();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UAC_NDI_Receiver::execNDI_Android_Receive_Stop)
 	{
 		P_FINISH;
@@ -82,10 +96,49 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 	{
 		UClass* Class = UAC_NDI_Receiver::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "Create_Receiver", &UAC_NDI_Receiver::execCreate_Receiver },
 			{ "NDI_Android_Receive_Start", &UAC_NDI_Receiver::execNDI_Android_Receive_Start },
 			{ "NDI_Android_Receive_Stop", &UAC_NDI_Receiver::execNDI_Android_Receive_Stop },
+			{ "Receive_Frames", &UAC_NDI_Receiver::execReceive_Frames },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics
+	{
+		struct AC_NDI_Receiver_eventCreate_Receiver_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((AC_NDI_Receiver_eventCreate_Receiver_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AC_NDI_Receiver_eventCreate_Receiver_Parms), &Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/AC_NDI_Receiver.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAC_NDI_Receiver, nullptr, "Create_Receiver", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::AC_NDI_Receiver_eventCreate_Receiver_Parms), Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080400, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UAC_NDI_Receiver_NDI_Android_Receive_Start_Statics
 	{
@@ -161,6 +214,43 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics
+	{
+		struct AC_NDI_Receiver_eventReceive_Frames_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((AC_NDI_Receiver_eventReceive_Frames_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AC_NDI_Receiver_eventReceive_Frames_Parms), &Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/AC_NDI_Receiver.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAC_NDI_Receiver, nullptr, "Receive_Frames", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::AC_NDI_Receiver_eventReceive_Frames_Parms), Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080400, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAC_NDI_Receiver);
 	UClass* Z_Construct_UClass_UAC_NDI_Receiver_NoRegister()
 	{
@@ -178,10 +268,9 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Received_Frame;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bNDI_Start_Receive_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Receive_Rate_MetaData[];
 #endif
-		static void NewProp_bNDI_Start_Receive_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bNDI_Start_Receive;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_Receive_Rate;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NDI_Found_MetaData[];
 #endif
@@ -199,8 +288,10 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_NDI_Android,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAC_NDI_Receiver_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UAC_NDI_Receiver_Create_Receiver, "Create_Receiver" }, // 2147230725
 		{ &Z_Construct_UFunction_UAC_NDI_Receiver_NDI_Android_Receive_Start, "NDI_Android_Receive_Start" }, // 4274344009
 		{ &Z_Construct_UFunction_UAC_NDI_Receiver_NDI_Android_Receive_Stop, "NDI_Android_Receive_Stop" }, // 2430609845
+		{ &Z_Construct_UFunction_UAC_NDI_Receiver_Receive_Frames, "Receive_Frames" }, // 413184655
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAC_NDI_Receiver_Statics::Class_MetaDataParams[] = {
@@ -218,16 +309,13 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Received_Frame = { "Received_Frame", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAC_NDI_Receiver, Received_Frame), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Received_Frame_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Received_Frame_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Receive_Rate_MetaData[] = {
 		{ "Category", "AC_NDI_Receiver" },
 		{ "ModuleRelativePath", "Public/AC_NDI_Receiver.h" },
+		{ "ToolTip", "Use seconds." },
 	};
 #endif
-	void Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive_SetBit(void* Obj)
-	{
-		((UAC_NDI_Receiver*)Obj)->bNDI_Start_Receive = 1;
-	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive = { "bNDI_Start_Receive", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAC_NDI_Receiver), &Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive_MetaData)) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Receive_Rate = { "Receive_Rate", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAC_NDI_Receiver, Receive_Rate), METADATA_PARAMS(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Receive_Rate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Receive_Rate_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_NDI_Found_MetaData[] = {
 		{ "Category", "AC_NDI_Receiver" },
@@ -244,7 +332,7 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Source_Index = { "Source_Index", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAC_NDI_Receiver, Source_Index), METADATA_PARAMS(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Source_Index_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Source_Index_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAC_NDI_Receiver_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Received_Frame,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_bNDI_Start_Receive,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Receive_Rate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_NDI_Found,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAC_NDI_Receiver_Statics::NewProp_Source_Index,
 	};
@@ -285,9 +373,9 @@ void EmptyLinkFunctionForGeneratedCodeAC_NDI_Receiver() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAC_NDI_Receiver, UAC_NDI_Receiver::StaticClass, TEXT("UAC_NDI_Receiver"), &Z_Registration_Info_UClass_UAC_NDI_Receiver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAC_NDI_Receiver), 117967561U) },
+		{ Z_Construct_UClass_UAC_NDI_Receiver, UAC_NDI_Receiver::StaticClass, TEXT("UAC_NDI_Receiver"), &Z_Registration_Info_UClass_UAC_NDI_Receiver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAC_NDI_Receiver), 1282491374U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_1842770466(TEXT("/Script/NDI_Android"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_1300670915(TEXT("/Script/NDI_Android"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

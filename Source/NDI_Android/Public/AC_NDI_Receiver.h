@@ -32,13 +32,19 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	UTexture2D* Received_Frame = nullptr;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ToolTip = "Use seconds."))
+	float Receive_Rate = 0.1;
+
 protected:
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(BlueprintReadOnly)
-	bool bNDI_Start_Receive = false;
+	UFUNCTION()
+	virtual bool Receive_Frames();
+
+	UFUNCTION()
+	virtual bool Create_Receiver();
 
 	UPROPERTY(BlueprintReadOnly)
 	UNDI_Android_Found* NDI_Found = nullptr;
@@ -46,12 +52,10 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	int32 Source_Index = -1;
 
-private:
+	FTimerHandle Timer_Receive_Frames;
+
+	FTimerDelegate Delegate_Receive_Frames;
 
 	NDIlib_recv_instance_t NDI_Receiver = nullptr;
-
-	virtual bool Create_Receiver();
-
-	virtual bool Receive_Frames();
 
 };

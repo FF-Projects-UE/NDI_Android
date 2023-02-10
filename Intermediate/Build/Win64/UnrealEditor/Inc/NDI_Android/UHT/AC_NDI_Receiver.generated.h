@@ -36,12 +36,16 @@ static inline void FDelegateReceived_DelegateWrapper(const FScriptDelegate& Dele
 #define FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_16_SPARSE_DATA
 #define FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_16_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execCreate_Receiver); \
+	DECLARE_FUNCTION(execReceive_Frames); \
 	DECLARE_FUNCTION(execNDI_Android_Receive_Stop); \
 	DECLARE_FUNCTION(execNDI_Android_Receive_Start);
 
 
 #define FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_AC_NDI_Receiver_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execCreate_Receiver); \
+	DECLARE_FUNCTION(execReceive_Frames); \
 	DECLARE_FUNCTION(execNDI_Android_Receive_Stop); \
 	DECLARE_FUNCTION(execNDI_Android_Receive_Start);
 

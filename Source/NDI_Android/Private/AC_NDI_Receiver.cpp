@@ -16,18 +16,12 @@ UAC_NDI_Receiver::UAC_NDI_Receiver()
 void UAC_NDI_Receiver::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
 void UAC_NDI_Receiver::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (this->bNDI_Start_Receive == true)
-	{
-		this->Receive_Frames();
-	}
 }
 
 bool UAC_NDI_Receiver::NDI_Android_Receive_Start(UNDI_Android_Found* In_NDI_Found, int32 In_Source_Index)
@@ -76,8 +70,10 @@ bool UAC_NDI_Receiver::Create_Receiver()
 	NDIlib_recv_connect(NDI_Receiver_Inst, &this->NDI_Found->NDI_Source_Founds[this->Source_Index]);
 
 	this->NDI_Receiver = NDI_Receiver_Inst;
-	this->bNDI_Start_Receive = true;
-
+	
+	this->Delegate_Receive_Frames.BindUFunction(this, "Receive_Frames");
+	GEngine->GetCurrentPlayWorld()->GetTimerManager().SetTimer(this->Timer_Receive_Frames, Delegate_Receive_Frames, this->Receive_Rate, true);
+	
 	return true;
 }
 
@@ -89,6 +85,7 @@ bool UAC_NDI_Receiver::Receive_Frames()
 	}
 	
 	NDIlib_video_frame_v2_t Frame_Received;
+	//NDIlib_audio_frame_v3_t Audio_Received;
 	NDIlib_recv_capture_v3(this->NDI_Receiver, &Frame_Received, NULL, nullptr, 1000);
 
 	if (Frame_Received.data_size_in_bytes > 0)
@@ -171,7 +168,8 @@ void UAC_NDI_Receiver::NDI_Android_Receive_Stop()
 		return;
 	}
 
-	this->bNDI_Start_Receive = false;
+	this->Timer_Receive_Frames.Invalidate();
+	this->Delegate_Receive_Frames.Unbind();
 
 	NDIlib_recv_destroy(this->NDI_Receiver);
 	this->NDI_Receiver = nullptr;

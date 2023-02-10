@@ -36,7 +36,6 @@ public class NDI_Android : ModuleRules
             PublicDefinitions.Add("NDI_SDK_ENABLED");
         }
 
-
         PublicDependencyModuleNames.AddRange(
 			new string[]
 			{

@@ -1797,22 +1797,6 @@ D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.AVSync.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.Genlock.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.KVM.h \
-  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Launch/Public/Android/AndroidJNI.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/log.h \
-  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Core/Public/Android/AndroidJavaEnv.h \
-  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/ApplicationCore/Public/Android/AndroidApplication.h \
-  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/ApplicationCore/Public/android/AndroidWindow.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/native_window.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/lib64/clang/14.0.6/include/stdbool.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/data_space.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/inttypes.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/lib64/clang/14.0.6/include/inttypes.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include/inttypes.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/inttypes.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/hardware_buffer.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/rect.h \
-  C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/native_window_jni.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_AndroidBPLibrary.generated.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/AC_NDI_Receiver.generated.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_Android.init.gen.cpp \
