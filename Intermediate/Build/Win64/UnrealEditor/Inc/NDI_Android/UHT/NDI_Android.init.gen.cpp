@@ -23,7 +23,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_Android_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xCE0102DC,
+				0xA1E9F1A2,
 				0x0BE58287,
 				METADATA_PARAMS(nullptr, 0)
 			};
@@ -31,5 +31,5 @@ void EmptyLinkFunctionForGeneratedCodeNDI_Android_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_NDI_Android.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NDI_Android(Z_Construct_UPackage__Script_NDI_Android, TEXT("/Script/NDI_Android"), Z_Registration_Info_UPackage__Script_NDI_Android, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xCE0102DC, 0x0BE58287));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NDI_Android(Z_Construct_UPackage__Script_NDI_Android, TEXT("/Script/NDI_Android"), Z_Registration_Info_UPackage__Script_NDI_Android, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xA1E9F1A2, 0x0BE58287));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -1,7 +1,7 @@
-D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp
+D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp
 /I .
-/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source\NDI_Android\ThirdParty\NDI\Windows\include
-/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source\NDI_Android\Private
+/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Source\NDI_Android\ThirdParty\NDI\Windows\include
+/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Source\NDI_Android\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -271,9 +271,9 @@ D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\
 /I Runtime\MovieSceneCapture\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController\UHT
 /I Developer\AnimationDataController\Public
-/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Inc\NDI_Android\UHT
-/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source
-/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source\NDI_Android\Public
+/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Inc\NDI_Android\UHT
+/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Source
+/I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Source\NDI_Android\Public
 /external:W0
 /external:I ThirdParty\mimalloc\include
 /external:I ThirdParty\LibTiff\Source\Win64
@@ -283,12 +283,12 @@ D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt"
-/FI"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Intermediate\Build\Win64\FF_Plugins_MobileEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Definitions.NDI_Android.h"
-/Yu"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Intermediate\Build\Win64\FF_Plugins_MobileEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Intermediate\Build\Win64\FF_Plugins_MobileEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp.obj"
-/sourceDependencies D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp.dep.json
+/FI"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Intermediate\Build\Win64\FF_PluginsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Definitions.NDI_Android.h"
+/Yu"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Intermediate\Build\Win64\FF_PluginsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Intermediate\Build\Win64\FF_PluginsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp.obj"
+/sourceDependencies D:\Epic\Projects\FROZEN\SDKs\FF_Plugins\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Development\NDI_Android\Module.NDI_Android.cpp.dep.json
 /Zc:inline
 /nologo
 /Oi
