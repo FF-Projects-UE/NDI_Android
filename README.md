@@ -27,7 +27,7 @@
 * NDI_Android_KVM_Keyboard
 
 ## SENDER USAGE
-* (Android) Start NSD service with your JNI solution. (Android Native fork has ready-to-use "EnableNsdService" function which implemented from us.)
+* (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us.)
 * Init NDIlib library if you didn't.
 * Create a sender object.
 * Send your Texture2D or Texture2D render target with respective function on "Set Timer by Event".
@@ -36,6 +36,7 @@
 * FPS inputs of texture send functions will just create a metada. So, it is not very important. For mobile 0.1 second timer and 30 FPS will give relatively good result.
 
 ## RECEIVER USAGE
+* (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us.)
 * Init NDIlib library if you didn't.
 * Find sources (you don't need create an array of NDI_Found_Sources object referance.)
 * Create a receiver with found sources. (Just plug NDI_Found_Sources object referance and give a source index)
@@ -43,3 +44,8 @@
 
 ## PERFORMANCE
 * Don't use +15 FPS on mobile (Samsung Galaxy S21). Because sending or receiving a texture is an expensive operation. (For example, TextureRenderTarget2D requires GameThread_GetRenderTargetResource function to read its data. Also we need to fix alpha valus with for loop.)
+
+## PLATFORM SUPPORT
+* It works on Windows and Android.
+* You can control a Windows PC from Android with KVM but you can't control an Android. This is NDI's limitation.
+* We don't have Mac to build binaries for Apple devices but NDI functions are same for all platforms. If you need iOS version, fork it, add necessary libraries to build.cs and make another UPL.xml for iOS. C++ side will work.
