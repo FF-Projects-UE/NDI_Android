@@ -9,6 +9,15 @@
 
 #include "NDI_AndroidBPLibrary.generated.h"
 
+UENUM(BlueprintType)
+enum class ENDI_KVM_Mouse : uint8
+{
+	Mouse_Left		UMETA(DisplayName = "Anonymous"),
+	Mouse_Middle	UMETA(DisplayName = "Username"),
+	Mouse_Right		UMETA(DisplayName = "Certificate"),
+};
+ENUM_CLASS_FLAGS(ENDI_KVM_Mouse)
+
 UCLASS(BlueprintType)
 class NDI_ANDROID_API UNDI_Android_Sender : public UObject
 {
@@ -34,8 +43,18 @@ public:
 
 };
 
+UCLASS(BlueprintType)
+class NDI_ANDROID_API UNDI_Android_Receiver : public UObject
+{
+	GENERATED_BODY()
+
+public:
+
+	NDIlib_recv_instance_t Receiver_Instance = nullptr;
+};
+
 UDELEGATE(BlueprintAuthorityOnly)
-DECLARE_DYNAMIC_DELEGATE_ThreeParams(FDelegateNdiFound, bool, bIsSuccessfull, UNDI_Android_Found*, Out_Founds, FString, OutCode);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FDelegateNdiFound, bool, bIsSuccessfull, UNDI_Android_Found*, Out_Founds, FString, Out_Code);
 
 UCLASS()
 class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
@@ -48,30 +67,70 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	* Return 1 is "Successful"
 	*/
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Init", Description = "", Keywords = "ndi, android, init, initialize"), Category = "NDI_Android|System")
-	static int32 NDI_Android_Init(FString& OutCode);
+	static int32 NDI_Android_Init(FString& Out_Code);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release", Keywords = "ndi, android, release, destroy, remove, uninit, uninitialize"), Category = "NDI_Android|System")
 	static bool NDI_Android_Release();
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "NDI Android Source Infos", Keywords = "ndi, android, source, infos"), Category = "NDI_Android|System")
-	static void NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* InFound, int32 SourceIndex);
+	static void NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* In_Found, int32 In_Source_Index);
 
 	/**
 	* @param In_Port use 1522 or 5960
 	*/
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Create Sender", Keywords = "ndi, android, sender, create"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Sender_Create(FString& OutCode, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream = "UE5_Android_NDI", int32 In_Port = 1522);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Sender Create", Keywords = "ndi, android, send, sender, start, create, video, frame"), Category = "NDI_Android|Send")
+	static bool NDI_Android_Sender_Create(FString& Out_Code, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream = "UE5_Android_NDI", int32 In_Port = 1522);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Sender", Keywords = "ndi, android, sender, release"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Sender_Release(FString& OutCode, UPARAM(ref)UNDI_Android_Sender*& NDI_Sender);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Sender Release", Keywords = "ndi, android, send, sender, stop, release, video, frame"), Category = "NDI_Android|Send")
+	static bool NDI_Android_Sender_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture2D", Keywords = "ndi, android, send, video, frame, texture2d"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Send_T2D(FString& OutCode, UPARAM(ref)UNDI_Android_Sender*& NDI_Sender, UTexture2D* InTexture2D, float InFPS);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture2D", Keywords = "ndi, android, send, video, frame, texture, 2d"), Category = "NDI_Android|Send")
+	static bool NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTexture2D* In_Texture2D, float In_FPS = 30);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture Render Target 2D", Keywords = "ndi, android, send, video, frame, texture, render, target, 2d"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Send_TRT2D(FString& OutCode, UPARAM(ref)UNDI_Android_Sender*& NDI_Sender, UTextureRenderTarget2D* InTRT2D, float InFPS);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture Render Target 2D", Keywords = "ndi, android, send, video, frame, texture, 2d, render, target"), Category = "NDI_Android|Send")
+	static bool NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTextureRenderTarget2D* In_TRT2D, float In_FPS = 30);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Find Sources", Keywords = "ndi, android, receive, video, frame, find"), Category = "NDI_Android|Receive")
-	static void NDI_Android_Find(FDelegateNdiFound DelegateNdiFound, FString InGroup = "Public");
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Find Sources", Keywords = "ndi, android, receive, receiver, source, find, video, frame"), Category = "NDI_Android|Receive")
+	static void NDI_Android_Find(FDelegateNdiFound DelegateNdiFound, FString In_ExtraIps, FString In_Group = "Public");
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receiver Create", Keywords = "ndi, android, receive, receiver, start, create"), Category = "NDI_Android|Receive")
+	static bool NDI_Android_Receiver_Create(UNDI_Android_Receiver* &Out_Receiver, FString & Out_Code, UPARAM(ref)UNDI_Android_Found * &In_NDI_Found, int32 In_Source_Index = -1, bool bAllowVideoField = false);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receiver Release", Keywords = "ndi, android, receive, receiver, stop, release, video, frame"), Category = "NDI_Android|Receive")
+	static void NDI_Android_Receiver_Release(UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receive Frames", Keywords = "ndi, android, receive, receiver, video, frame"), Category = "NDI_Android|Receive")
+	static bool NDI_Android_Receive_Frames(UTexture2D*& Out_Frame, FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
+
+	// Callback function to generaete frames.
+	static UTexture2D* Callback_GenerateFrame(NDIlib_video_frame_v2_t In_Frame_Received, NDIlib_recv_instance_t In_NDI_Receiver, EPixelFormat PixelFormat);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receive Audio (Exprimental)", Keywords = "ndi, android, receive, receiver, video, frame"), Category = "NDI_Android|Receive")
+	static bool NDI_Android_Receive_Audio(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Button", Keywords = "ndi, android, kvm, mouse, send"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Mouse_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, ENDI_KVM_Mouse MouseButton);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Mouse Button", Keywords = "ndi, android, kvm, mouse, release"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Mouse_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, ENDI_KVM_Mouse MouseButton);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Position", Keywords = "ndi, android, kvm, mouse, position"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Mouse_Position(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FVector2f In_Mouse_Position);
 
 };
+
+/*
+* Sample codes
+* Use these in header as UPROPERTY
+
+FTimerHandle Timer_Receive_Frames;
+FTimerDelegate Delegate_Receive_Frames;
+
+//
+
+* Use these in your code
+
+this->Delegate_Receive_Frames.BindUFunction(this, "Receive_Frames"); // "Receive_Frames" is an UFUNCTION name.
+GEngine->GetCurrentPlayWorld()->GetTimerManager().SetTimer(this->Timer_Receive_Frames, Delegate_Receive_Frames, this->Receive_Rate, true);
+
+*/

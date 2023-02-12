@@ -271,6 +271,11 @@ D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\
 /I Runtime\MovieSceneCapture\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController\UHT
 /I Developer\AnimationDataController\Public
+/I ..\Plugins\Runtime\AndroidPermission\Intermediate\Build\Win64\UnrealEditor\Inc\AndroidPermission\UHT
+/I ..\Plugins\Runtime\AndroidPermission\Source
+/I Runtime\Launch\Public
+/I ..\Plugins\Runtime\AndroidPermission\Source\AndroidPermission\Classes
+/I ..\Plugins\Runtime\AndroidPermission\Source\AndroidPermission\Public
 /I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Intermediate\Build\Win64\UnrealEditor\Inc\NDI_Android\UHT
 /I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source
 /I D:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\NDI_Android\Source\NDI_Android\Public
