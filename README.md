@@ -6,18 +6,18 @@
 ## WORKING FUNCTIONS
 * NDI_Android_Init
 * NDI_Android_Release
-
+##
 * NDI_Android_Sender_Create
 * NDI_Android_Sender_Release
-* NDI Android Send Texture2D (ARGB or BGRA textures required)
-* NDI Android Send TextureRenderTarget2D (PF_B8G8R8A8 format required)
-
+* NDI_Android_Send_T2D (Texture2D - ARGB or BGRA textures required)
+* NDI_Android_Send_TRT2D (Texture Render Target 2D - PF_B8G8R8A8 format required)
+##
 * NDI_Android_Source_Infos
 * NDI_Android_Find
 * NDI_Android_Receiver_Create
 * NDI_Android_Receiver_Release
 * NDI_Android_Receive_Frames
-
+##
 * NDI_Android_KVM_Mouse_Send
 * NDI_Android_KVM_Mouse_Release
 * NDI_Android_KVM_Mouse_Position (It sends an FVector2D data. So, you need to implement your own cursor calculation.)
