@@ -27,7 +27,7 @@
 * NDI_Android_KVM_Keyboard
 
 ## SENDER USAGE
-* (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us.)
+* (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us. Use same port for both NSD service and sender.)
 * Init NDIlib library if you didn't.
 * Create a sender object.
 * Send your Texture2D or Texture2D render target with respective function on "Set Timer by Event".
