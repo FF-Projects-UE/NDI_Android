@@ -20,7 +20,7 @@
 
 * NDI_Android_KVM_Mouse_Send
 * NDI_Android_KVM_Mouse_Release
-* NDI_Android_KVM_Mouse_Position (It send an FVector2D data. So, you need to implement your own cursor calculation.)
+* NDI_Android_KVM_Mouse_Position (It sends an FVector2D data. So, you need to implement your own cursor calculation.)
 
 ## WORK-IN-PROGESS
 * NDI_Android_Receive_Audio (We will test its performance after finish. If we won't be able to create sound at 0.16 ms speed at least, we will delete it. You can receive frames and audios at different time loop.)
