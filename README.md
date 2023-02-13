@@ -28,17 +28,17 @@
 
 ## SENDER USAGE
 * (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us. Use same port for both NSD service and sender.)
-* Init NDIlib library if you didn't.
-* Create a sender object.
-* Send your Texture2D or Texture2D render target with respective function on "Set Timer by Event".
+* Init NDIlib library if you didn't. (NDI_Android_Init)
+* Create a sender object. (NDI_Android_Sender_Create)
+* Send your Texture2D, Texture Render Target 2D or Media Texture with respective function on "Set Timer by Event".
 * You can use Media Player > Media Texture > Material > Draw Material on Render Target workflow to send android camera.
 * You can change sending FPS with "Set Timer by Event" function's loop time. If you use 0.1 seconds, it will send at 10 FPS. If you use 0.016 it will send at 60 FPS.
 * FPS inputs of texture send functions will just create a metada. So, it is not very important. For mobile 0.1 second timer and 30 FPS will give relatively good result.
 
 ## RECEIVER USAGE
 * (Only Android) Start NSD service with your JNI solution if you didn't. (Android Native has ready-to-use "EnableNsdService" function which implemented by us.)
-* Init NDIlib library if you didn't.
-* Find sources (you don't need create an array of NDI_Found_Sources object referance.)
+* Init NDIlib library if you didn't. (NDI_Android_Init)
+* Find sources (NDI_Android_Find, you don't need create an array of NDI_Found_Sources object referance. Object's itself works like an array.)
 * Create a receiver with found sources. (Just plug NDI_Found_Sources object referance and give a source index)
 * Receive frames with "NDI Android Receive Frames" function on "Event Tick (Windows)" or "Set Timer by Event (Android)"
 
