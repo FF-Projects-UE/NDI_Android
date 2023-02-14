@@ -49,3 +49,14 @@
 * It works on Windows and Android.
 * You can control a Windows PC from Android with KVM but you can't control an Android. This is NDI's limitation.
 * We don't have Mac to build binaries for Apple devices but NDI functions are same for all platforms. If you need iOS version, fork it, add necessary libraries to build.cs and make another UPL.xml for iOS. C++ side will work.
+
+## SAMPLE C++ TIMER CODE
+```
+// In header file.
+FTimerHandle Timer_Receive_Frames;
+FTimerDelegate Delegate_Receive_Frames;
+
+// In decleration.
+this->Delegate_Receive_Frames.BindUFunction(this, "Receive_Frames"); // "Receive_Frames" is an UFUNCTION name.
+GEngine->GetCurrentPlayWorld()->GetTimerManager().SetTimer(this->Timer_Receive_Frames, Delegate_Receive_Frames, this->Receive_Rate, true);
+```

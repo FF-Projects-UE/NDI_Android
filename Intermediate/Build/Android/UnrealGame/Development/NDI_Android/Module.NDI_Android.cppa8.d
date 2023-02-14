@@ -1777,9 +1777,17 @@ D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/
   C:/Users/erayo/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/cmath \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Development/NDI_Android/Module.NDI_Android.cpp \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Development/NDI_Android/Definitions.NDI_Android.h \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/AC_NDI_Receiver.gen.cpp \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/Public/AC_NDI_Receiver.h \
+  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_Android.init.gen.cpp \
+  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_AndroidBPLibrary.gen.cpp \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/Public/NDI_AndroidBPLibrary.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/MediaAssets/Public/MediaTexture.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/MediaUtils/Public/MediaSampleQueue.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Media/Public/IMediaSamples.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Media/Public/IMediaTimeSource.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/MediaUtils/Public/MediaSampleSink.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/MediaUtils/Public/MediaSampleSource.h \
+  D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Media/Public/IMediaTextureSample.h \
+  D:/Epic/Engines/UE_5.1/Engine/Intermediate/Build/Android/UnrealGame/Inc/MediaAssets/UHT/MediaTexture.generated.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.Advanced.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.Lib.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.compat.h \
@@ -1798,10 +1806,6 @@ D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.Genlock.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/ThirdParty/NDI/Android/include/Processing.NDI.KVM.h \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_AndroidBPLibrary.generated.h \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/AC_NDI_Receiver.generated.h \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_Android.init.gen.cpp \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Intermediate/Build/Android/UnrealGame/Inc/NDI_Android/UHT/NDI_AndroidBPLibrary.gen.cpp \
-  D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/Private/AC_NDI_Receiver.cpp \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/Private/NDI_Android.cpp \
   D:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/NDI_Android/Source/NDI_Android/Public/NDI_Android.h \
   D:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Projects/Public/Interfaces/IPluginManager.h \

@@ -4,7 +4,11 @@
 #include "NDI_Android.h"
 
 // UE Includes
-#include "Kismet/KismetRenderingLibrary.h"
+#include "Slate/WidgetRenderer.h"
+#include "Runtime/UMG/Public/UMG.h"
+#include "Kismet/KismetRenderingLibrary.h"	// Texture2D
+#include "RHICommandList.h"					// UMediaTexture : FRHICommandListImmediate
+#include "RenderingThread.h"				// UMediaTexture : GetImmediateCommandList_ForRenderCommand()
 
 THIRD_PARTY_INCLUDES_START
 THIRD_PARTY_INCLUDES_END
@@ -13,6 +17,32 @@ UNDI_AndroidBPLibrary::UNDI_AndroidBPLibrary(const FObjectInitializer& ObjectIni
 : Super(ObjectInitializer)
 {
 
+}
+
+UTextureRenderTarget2D* UNDI_AndroidBPLibrary::WidgetToTextureRenderTarget2d(FString& OutCode, UUserWidget* InWidget, FVector2D InDrawSize)
+{
+	if (IsValid(InWidget) == false)
+	{
+		OutCode = "Source widget is not valid";
+		return nullptr;
+	}
+
+	UTextureRenderTarget2D* TextureTarget = FWidgetRenderer::CreateTargetFor(InDrawSize, TextureFilter::TF_Default, false);
+	TextureTarget->RenderTargetFormat = RTF_RGBA8;
+
+	FWidgetRenderer* WidgetRenderer = new FWidgetRenderer(true);
+	WidgetRenderer->DrawWidget(TextureTarget, InWidget->TakeWidget(), InDrawSize, 0, false);
+
+	if (IsValid(TextureTarget) == true)
+	{
+		return TextureTarget;
+	}
+
+	else
+	{
+		OutCode = "Unable to create Texture Render Target 2D";
+		return nullptr;
+	}
 }
 
 int32 UNDI_AndroidBPLibrary::NDI_Android_Init(FString& OutCode)
@@ -38,6 +68,33 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Release()
 	NDIlib_destroy();
 
 	return true;
+}
+
+void UNDI_AndroidBPLibrary::NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* In_Found, int32 In_Source_Index)
+{
+	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_ip_address).IsEmpty() == false)
+	{
+		SourceIP = In_Found->NDI_Source_Founds[In_Source_Index].p_ip_address;
+	}
+
+	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_ndi_name).IsEmpty() == false)
+	{
+		SourceName = In_Found->NDI_Source_Founds[In_Source_Index].p_ndi_name;
+	}
+
+	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_url_address).IsEmpty() == false)
+	{
+		SourceURL = In_Found->NDI_Source_Founds[In_Source_Index].p_url_address;
+	}
+}
+
+float UNDI_AndroidBPLibrary::NDI_Android_Send_Rate(int32 FPS)
+{
+	double Rate_MS_Double = (double)1000 / FPS;
+	int32 Rate_MS_Int = FMath::TruncToInt32(Rate_MS_Double);
+	float Rate_Sec = Rate_MS_Int / (float)1000;
+	
+	return Rate_Sec;
 }
 
 bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Create(FString& Out_Code, UNDI_Android_Sender*& Out_NDI_Sender, FString In_Name_Stream, int32 In_Port)
@@ -95,25 +152,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Sender_Release(FString& Out_Code, UPARAM
 	return true;
 }
 
-void UNDI_AndroidBPLibrary::NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* In_Found, int32 In_Source_Index)
-{
-	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_ip_address).IsEmpty() == false)
-	{
-		SourceIP = In_Found->NDI_Source_Founds[In_Source_Index].p_ip_address;
-	}
-
-	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_ndi_name).IsEmpty() == false)
-	{
-		SourceName = In_Found->NDI_Source_Founds[In_Source_Index].p_ndi_name;
-	}
-
-	if (FString(In_Found->NDI_Source_Founds[In_Source_Index].p_url_address).IsEmpty() == false)
-	{
-		SourceURL = In_Found->NDI_Source_Founds[In_Source_Index].p_url_address;
-	}
-}
-
-bool UNDI_AndroidBPLibrary::NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTexture2D* In_Texture2D, float In_FPS)
+bool UNDI_AndroidBPLibrary::NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTexture2D* In_Texture2D, int32 In_FPS)
 {
 	if (IsValid(In_NDI_Sender) == false)
 	{
@@ -129,7 +168,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)U
 
 	if (IsValid(In_Texture2D) == false)
 	{
-		Out_Code = "InTexture2D is not valid.";
+		Out_Code = "Texture 2D is not valid.";
 		return false;
 	}
 
@@ -170,7 +209,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)U
 	return true;
 }
 
-bool UNDI_AndroidBPLibrary::NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTextureRenderTarget2D* In_TRT2D, float In_FPS)
+bool UNDI_AndroidBPLibrary::NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTextureRenderTarget2D* In_TRT2D, int32 In_FPS)
 {
 	if (IsValid(In_NDI_Sender) == false)
 	{
@@ -186,7 +225,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref
 
 	if (IsValid(In_TRT2D) == false)
 	{
-		Out_Code = "InTexture2D is not valid.";
+		Out_Code = "Texture Render Target 2D is not valid.";
 		return false;
 	}
 
@@ -217,7 +256,7 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref
 
 			FMemory::Memcpy(In_NDI_Sender->NDI_Video_Frame.p_data, NewAlpha.GetData(), static_cast<size_t>(In_TRT2D->SizeX) * static_cast<size_t>(In_TRT2D->SizeY) * 4);
 
-			NDIlib_send_send_video_v2(In_NDI_Sender->NDI_Send_Instance, &In_NDI_Sender->NDI_Video_Frame);
+			NDIlib_send_send_video_async_v2(In_NDI_Sender->NDI_Send_Instance, &In_NDI_Sender->NDI_Video_Frame);
 			
 			AsyncTask(ENamedThreads::GameThread, []()
 				{
@@ -226,6 +265,50 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref
 			);
 		}
 	);
+
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_Send_MT(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UMediaTexture* In_MT, int32 In_FPS)
+{
+	if (IsValid(In_NDI_Sender) == false)
+	{
+		Out_Code = "NDI_Sender is not valid.";
+		return false;
+	}
+
+	if (!In_NDI_Sender->NDI_Send_Instance)
+	{
+		Out_Code = "NDI_Send_Instance is not valid.";
+		return false;
+	}
+
+	if (IsValid(In_MT) == false)
+	{
+		Out_Code = "Media Texture is not valid.";
+		return false;
+	}
+	
+	TArray<FColor> Array_Color;
+	ENQUEUE_RENDER_COMMAND(UpdateTextureRegionsData)([In_MT, &Array_Color](FRHICommandListImmediate& CommandList)
+		{
+			CommandList.ReadSurfaceData(In_MT->GetResource()->GetTextureRHI(), FIntRect(0, 0, In_MT->GetWidth(), In_MT->GetHeight()), Array_Color, FReadSurfaceDataFlags(RCM_UNorm, CubeFace_MAX));
+		}
+	);
+
+	FlushRenderingCommands();
+
+	In_NDI_Sender->NDI_Video_Frame.xres = In_MT->GetWidth();
+	In_NDI_Sender->NDI_Video_Frame.yres = In_MT->GetHeight();
+	In_NDI_Sender->NDI_Video_Frame.FourCC = NDIlib_FourCC_video_type_BGRA;
+	In_NDI_Sender->NDI_Video_Frame.frame_format_type = NDIlib_frame_format_type_progressive;
+	In_NDI_Sender->NDI_Video_Frame.frame_rate_N = In_FPS * 1001;
+	In_NDI_Sender->NDI_Video_Frame.frame_rate_D = 1001;
+	In_NDI_Sender->NDI_Video_Frame.p_data = (uint8_t*)malloc(static_cast<size_t>(In_MT->GetWidth()) * static_cast<size_t>(In_MT->GetHeight()) * 4);
+
+	FMemory::Memcpy(In_NDI_Sender->NDI_Video_Frame.p_data, Array_Color.GetData(), static_cast<size_t>(In_MT->GetWidth())* static_cast<size_t>(In_MT->GetHeight()) * 4);
+
+	NDIlib_send_send_video_async_v2(In_NDI_Sender->NDI_Send_Instance, &In_NDI_Sender->NDI_Video_Frame);
 
 	return true;
 }

@@ -4,6 +4,9 @@
 
 #include "Kismet/BlueprintFunctionLibrary.h"
 
+// UE Includes.
+#include "MediaTexture.h"
+
 // NDI Includes.
 #include <Processing.NDI.Advanced.h>
 
@@ -61,6 +64,9 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 	
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Widget To Texture Render Target 2D", Keywords = "texture, render, target, 2d, widget, convert"), Category = "NDI_Android|Converter")
+	static UTextureRenderTarget2D* WidgetToTextureRenderTarget2d(FString& OutCode, UUserWidget* InWidget, FVector2D InDrawSize);
+
 	/**
 	* Return -1 is "CPU doesn't support NDI"
 	* Return 0 is "Unable to initialize NDIlib"
@@ -75,6 +81,9 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "NDI Android Source Infos", Keywords = "ndi, android, source, infos"), Category = "NDI_Android|System")
 	static void NDI_Android_Source_Infos(FString& SourceIP, FString& SourceName, FString& SourceURL, UNDI_Android_Found* In_Found, int32 In_Source_Index);
 
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "NDI Android Send Rate", Keywords = "ndi, android, send, sender, rate"), Category = "NDI_Android|System")
+	static float NDI_Android_Send_Rate(int32 FPS);
+
 	/**
 	* @param In_Port use 1522 or 5960
 	*/
@@ -85,10 +94,13 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	static bool NDI_Android_Sender_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture2D", Keywords = "ndi, android, send, video, frame, texture, 2d"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTexture2D* In_Texture2D, float In_FPS = 30);
+	static bool NDI_Android_Send_T2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTexture2D* In_Texture2D, int32 In_FPS = 30);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Texture Render Target 2D", Keywords = "ndi, android, send, video, frame, texture, 2d, render, target"), Category = "NDI_Android|Send")
-	static bool NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTextureRenderTarget2D* In_TRT2D, float In_FPS = 30);
+	static bool NDI_Android_Send_TRT2D(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UTextureRenderTarget2D* In_TRT2D, int32 In_FPS = 30);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Media Texture", Keywords = "ndi, android, send, video, frame, texture, media"), Category = "NDI_Android|Send")
+	static bool NDI_Android_Send_MT(FString& Out_Code, UPARAM(ref)UNDI_Android_Sender*& In_NDI_Sender, UMediaTexture* In_MT, int32 In_FPS = 30);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Find Sources", Keywords = "ndi, android, receive, receiver, source, find, video, frame"), Category = "NDI_Android|Receive")
 	static void NDI_Android_Find(FDelegateNdiFound DelegateNdiFound, FString In_ExtraIps, FString In_Group = "Public");
@@ -118,19 +130,3 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	static bool NDI_Android_KVM_Mouse_Position(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FVector2f In_Mouse_Position);
 
 };
-
-/*
-* Sample codes
-* Use these in header as UPROPERTY
-
-FTimerHandle Timer_Receive_Frames;
-FTimerDelegate Delegate_Receive_Frames;
-
-//
-
-* Use these in your code
-
-this->Delegate_Receive_Frames.BindUFunction(this, "Receive_Frames"); // "Receive_Frames" is an UFUNCTION name.
-GEngine->GetCurrentPlayWorld()->GetTimerManager().SetTimer(this->Timer_Receive_Frames, Delegate_Receive_Frames, this->Receive_Rate, true);
-
-*/

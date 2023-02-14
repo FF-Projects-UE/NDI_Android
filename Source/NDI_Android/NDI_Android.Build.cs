@@ -44,7 +44,6 @@ public class NDI_Android : ModuleRules
 			}
 			);
 			
-		
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
@@ -52,11 +51,13 @@ public class NDI_Android : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "Projects"
-				// ... add private dependencies that you statically link with here ...	
-			}
+                "Projects",
+				"MediaAssets",		// UMediaTexture : Base
+				"RHI",				// UMediaTexture : FRHICommandListImmediate
+				"RenderCore",		// UMediaTexture : GetImmediateCommandList_ForRenderCommand()
+				"UMG",
+            }
 			);
-		
 		
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
