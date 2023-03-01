@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -11,6 +11,18 @@
 #include <Processing.NDI.Advanced.h>
 
 #include "NDI_AndroidBPLibrary.generated.h"
+
+USTRUCT(BlueprintType)
+struct FByteArray
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<uint8> Array_Bytes;
+
+};
 
 UENUM(BlueprintType)
 enum class ENDI_KVM_Mouse : uint8
@@ -58,6 +70,12 @@ public:
 
 UDELEGATE(BlueprintAuthorityOnly)
 DECLARE_DYNAMIC_DELEGATE_ThreeParams(FDelegateNdiFound, bool, bIsSuccessfull, UNDI_Android_Found*, Out_Founds, FString, Out_Code);
+
+UDELEGATE(BlueprintAuthorityOnly)
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FNdiVideoReceived, bool, bIsSuccessfull, UTexture2D*, Out_T2D, FString, Out_Code);
+
+UDELEGATE(BlueprintAuthorityOnly)
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FNdiAudioReceived, bool, bIsSuccessfull, FByteArray, Out_Audio_Buffer, FString, Out_Code);
 
 UCLASS()
 class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
@@ -112,21 +130,36 @@ class UNDI_AndroidBPLibrary : public UBlueprintFunctionLibrary
 	static void NDI_Android_Receiver_Release(UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receive Frames", Keywords = "ndi, android, receive, receiver, video, frame"), Category = "NDI_Android|Receive")
-	static bool NDI_Android_Receive_Frames(UTexture2D*& Out_Frame, FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
+	static void NDI_Android_Receive_Frames(FNdiVideoReceived DelegateVideoReceived, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
 
 	// Callback function to generaete frames.
 	static UTexture2D* Callback_GenerateFrame(NDIlib_video_frame_v2_t In_Frame_Received, NDIlib_recv_instance_t In_NDI_Receiver, EPixelFormat PixelFormat);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receive Audio (Exprimental)", Keywords = "ndi, android, receive, receiver, video, frame"), Category = "NDI_Android|Receive")
-	static bool NDI_Android_Receive_Audio(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Receive Audio (Exprimental)", Keywords = "ndi, android, receive, receiver, audio, frame"), Category = "NDI_Android|Receive")
+	static void NDI_Android_Receive_Audio(FNdiAudioReceived DelegateAudioReceived, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Button", Keywords = "ndi, android, kvm, mouse, send"), Category = "NDI_Android|KVM")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Button", Keywords = "ndi, android, kvm, mouse, send"), Category = "NDI_Android|KVM|Mouse")
 	static bool NDI_Android_KVM_Mouse_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, ENDI_KVM_Mouse MouseButton);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Mouse Button", Keywords = "ndi, android, kvm, mouse, release"), Category = "NDI_Android|KVM")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Mouse Button", Keywords = "ndi, android, kvm, mouse, release"), Category = "NDI_Android|KVM|Mouse")
 	static bool NDI_Android_KVM_Mouse_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, ENDI_KVM_Mouse MouseButton);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Position", Keywords = "ndi, android, kvm, mouse, position"), Category = "NDI_Android|KVM")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Position", Keywords = "ndi, android, kvm, mouse, position"), Category = "NDI_Android|KVM|Mouse")
 	static bool NDI_Android_KVM_Mouse_Position(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FVector2f In_Mouse_Position);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Wheel Vertical", Keywords = "ndi, android, kvm, mouse, wheel, vertical"), Category = "NDI_Android|KVM|Mouse")
+	static bool NDI_Android_KVM_Mouse_Wheel_Vertical(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, float MouseWheel);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Mouse Wheel Horizontal", Keywords = "ndi, android, kvm, mouse, wheel, horizontal"), Category = "NDI_Android|KVM|Mouse")
+	static bool NDI_Android_KVM_Mouse_Wheel_Horizontal(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, float MouseWheel);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Keyboard", Keywords = "ndi, android, kvm, keyboard, send"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Keyboard_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString Input);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Release Keyboard", Keywords = "ndi, android, kvm, keyboard, release"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Keyboard_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString Input);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "NDI Android Send Clipboard", Keywords = "ndi, android, kvm, clipboard, send"), Category = "NDI_Android|KVM")
+	static bool NDI_Android_KVM_Clipboard_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString ClipboardContent);
 
 };

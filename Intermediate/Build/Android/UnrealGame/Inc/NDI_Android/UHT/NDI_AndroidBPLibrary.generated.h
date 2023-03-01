@@ -15,6 +15,7 @@ class UNDI_Android_Receiver;
 class UNDI_Android_Sender;
 class UTexture2D;
 class UTextureRenderTarget2D;
+class UUserWidget;
 enum class ENDI_KVM_Mouse : uint8;
 #ifdef NDI_ANDROID_NDI_AndroidBPLibrary_generated_h
 #error "NDI_AndroidBPLibrary.generated.h already included, missing '#pragma once' in NDI_AndroidBPLibrary.h"
@@ -288,7 +289,8 @@ static inline void FDelegateNdiFound_DelegateWrapper(const FScriptDelegate& Dele
 	DECLARE_FUNCTION(execNDI_Android_Send_Rate); \
 	DECLARE_FUNCTION(execNDI_Android_Source_Infos); \
 	DECLARE_FUNCTION(execNDI_Android_Release); \
-	DECLARE_FUNCTION(execNDI_Android_Init);
+	DECLARE_FUNCTION(execNDI_Android_Init); \
+	DECLARE_FUNCTION(execWidgetToTextureRenderTarget2d);
 
 
 #define FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_65_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -309,7 +311,8 @@ static inline void FDelegateNdiFound_DelegateWrapper(const FScriptDelegate& Dele
 	DECLARE_FUNCTION(execNDI_Android_Send_Rate); \
 	DECLARE_FUNCTION(execNDI_Android_Source_Infos); \
 	DECLARE_FUNCTION(execNDI_Android_Release); \
-	DECLARE_FUNCTION(execNDI_Android_Init);
+	DECLARE_FUNCTION(execNDI_Android_Init); \
+	DECLARE_FUNCTION(execWidgetToTextureRenderTarget2d);
 
 
 #define FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_65_ACCESSORS

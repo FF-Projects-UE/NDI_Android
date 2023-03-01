@@ -10,6 +10,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 // Cross Module References
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2f();
 	ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 	ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
@@ -25,6 +26,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	NDI_ANDROID_API UClass* Z_Construct_UClass_UNDI_AndroidBPLibrary_NoRegister();
 	NDI_ANDROID_API UEnum* Z_Construct_UEnum_NDI_Android_ENDI_KVM_Mouse();
 	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_DelegateNdiFound__DelegateSignature();
+	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NDI_Android();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_ENDI_KVM_Mouse;
@@ -492,6 +494,16 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		*(int32*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_Init(Z_Param_Out_Out_Code);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execWidgetToTextureRenderTarget2d)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_OutCode);
+		P_GET_OBJECT(UUserWidget,Z_Param_InWidget);
+		P_GET_STRUCT(FVector2D,Z_Param_InDrawSize);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(UTextureRenderTarget2D**)Z_Param__Result=UNDI_AndroidBPLibrary::WidgetToTextureRenderTarget2d(Z_Param_Out_OutCode,Z_Param_InWidget,Z_Param_InDrawSize);
+		P_NATIVE_END;
+	}
 	void UNDI_AndroidBPLibrary::StaticRegisterNativesUNDI_AndroidBPLibrary()
 	{
 		UClass* Class = UNDI_AndroidBPLibrary::StaticClass();
@@ -513,6 +525,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 			{ "NDI_Android_Sender_Create", &UNDI_AndroidBPLibrary::execNDI_Android_Sender_Create },
 			{ "NDI_Android_Sender_Release", &UNDI_AndroidBPLibrary::execNDI_Android_Sender_Release },
 			{ "NDI_Android_Source_Infos", &UNDI_AndroidBPLibrary::execNDI_Android_Source_Infos },
+			{ "WidgetToTextureRenderTarget2d", &UNDI_AndroidBPLibrary::execWidgetToTextureRenderTarget2d },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -1375,6 +1388,61 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms
+		{
+			FString OutCode;
+			UUserWidget* InWidget;
+			FVector2D InDrawSize;
+			UTextureRenderTarget2D* ReturnValue;
+		};
+		static const UECodeGen_Private::FStrPropertyParams NewProp_OutCode;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InWidget_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InWidget;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_InDrawSize;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_OutCode = { "OutCode", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms, OutCode), METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InWidget_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InWidget = { "InWidget", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms, InWidget), Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InWidget_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InDrawSize = { "InDrawSize", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms, InDrawSize), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms, ReturnValue), Z_Construct_UClass_UTextureRenderTarget2D_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_OutCode,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InWidget,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_InDrawSize,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|Converter" },
+		{ "DisplayName", "Widget To Texture Render Target 2D" },
+		{ "Keywords", "texture, render, target, 2d, widget, convert" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "WidgetToTextureRenderTarget2d", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::NDI_AndroidBPLibrary_eventWidgetToTextureRenderTarget2d_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C22401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UNDI_AndroidBPLibrary);
 	UClass* Z_Construct_UClass_UNDI_AndroidBPLibrary_NoRegister()
 	{
@@ -1412,6 +1480,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Create, "NDI_Android_Sender_Create" }, // 4086689719
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Sender_Release, "NDI_Android_Sender_Release" }, // 3786986968
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Source_Infos, "NDI_Android_Source_Infos" }, // 2530200141
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_WidgetToTextureRenderTarget2d, "WidgetToTextureRenderTarget2d" }, // 2311372558
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNDI_AndroidBPLibrary_Statics::Class_MetaDataParams[] = {
@@ -1463,9 +1532,9 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		{ Z_Construct_UClass_UNDI_Android_Sender, UNDI_Android_Sender::StaticClass, TEXT("UNDI_Android_Sender"), &Z_Registration_Info_UClass_UNDI_Android_Sender, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Sender), 174056774U) },
 		{ Z_Construct_UClass_UNDI_Android_Found, UNDI_Android_Found::StaticClass, TEXT("UNDI_Android_Found"), &Z_Registration_Info_UClass_UNDI_Android_Found, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Found), 3038918707U) },
 		{ Z_Construct_UClass_UNDI_Android_Receiver, UNDI_Android_Receiver::StaticClass, TEXT("UNDI_Android_Receiver"), &Z_Registration_Info_UClass_UNDI_Android_Receiver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Receiver), 3570776348U) },
-		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 3053869449U) },
+		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 4283242276U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_1802245216(TEXT("/Script/NDI_Android"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_1396230397(TEXT("/Script/NDI_Android"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::EnumInfo));

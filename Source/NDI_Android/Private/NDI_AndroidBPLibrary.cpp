@@ -323,7 +323,7 @@ void UNDI_AndroidBPLibrary::NDI_Android_Find(FDelegateNdiFound DelegateNdiFound,
 	NDI_Find_Create.p_extra_ips = ExtraIps.c_str();
 	NDI_Find_Create.p_groups = GroupName.c_str();
 
-	AsyncTask(ENamedThreads::AnyNormalThreadNormalTask, [DelegateNdiFound, NDI_Find_Create]()
+	AsyncTask(ENamedThreads::AnyThread, [DelegateNdiFound, NDI_Find_Create]()
 		{
 			UNDI_Android_Found* Object_Sources = NewObject<UNDI_Android_Found>();
 			NDIlib_find_instance_t NDI_Find_Instance = NDIlib_find_create_v3(&NDI_Find_Create);
@@ -331,21 +331,36 @@ void UNDI_AndroidBPLibrary::NDI_Android_Find(FDelegateNdiFound DelegateNdiFound,
 			
 			const NDIlib_source_t* Found_Source = nullptr;
 			
-			while (NDIlib_find_wait_for_sources(NDI_Find_Instance, 2000))
+			while (NDIlib_find_wait_for_sources(NDI_Find_Instance, 1000))
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, "Searching sources.");
 				Found_Source = NDIlib_find_get_current_sources(NDI_Find_Instance, &Count);
 			}
 
-			Object_Sources->NDI_Source_Founds = Found_Source;
-			Object_Sources->Source_Count = Count;
+			if (Count > 0)
+			{
+				Object_Sources->NDI_Source_Founds = Found_Source;
+				Object_Sources->Source_Count = Count;
 
-			NDIlib_find_destroy(NDI_Find_Instance);
+				NDIlib_find_destroy(NDI_Find_Instance);
 
-			AsyncTask(ENamedThreads::GameThread, [DelegateNdiFound, Object_Sources]()
-				{
-					DelegateNdiFound.ExecuteIfBound(true, Object_Sources, "Sucessful");
-				}
-			);
+				AsyncTask(ENamedThreads::GameThread, [DelegateNdiFound, Object_Sources]()
+					{
+						DelegateNdiFound.ExecuteIfBound(true, Object_Sources, "Sucessful.");
+					}
+				);
+			}
+
+			else
+			{
+				NDIlib_find_destroy(NDI_Find_Instance);
+				
+				AsyncTask(ENamedThreads::GameThread, [DelegateNdiFound, Object_Sources]()
+					{
+						DelegateNdiFound.ExecuteIfBound(false, Object_Sources, "Finder unable to find any resources.");
+					}
+				);
+			}
 		}
 	);
 }
@@ -354,8 +369,22 @@ bool UNDI_AndroidBPLibrary::NDI_Android_Receiver_Create(UNDI_Android_Receiver*& 
 {
 	if (IsValid(In_NDI_Found) == false)
 	{
-		Out_Code = "There is no NDI source to receive.";
+		Out_Code = "NDI Found object is invalid.";
 
+		return false;
+	}
+
+	if (In_NDI_Found->Source_Count == 0)
+	{
+		Out_Code = "Receiver creator unable to find any resources.";
+
+		return false;
+	}
+
+	if (!In_NDI_Found->NDI_Source_Founds)
+	{
+		Out_Code = "Receiver creator unable to find any resources.";
+		
 		return false;
 	}
 
@@ -425,74 +454,101 @@ void UNDI_AndroidBPLibrary::NDI_Android_Receiver_Release(UPARAM(ref)UNDI_Android
 	return;
 }
 
-bool UNDI_AndroidBPLibrary::NDI_Android_Receive_Frames(UTexture2D*& Out_Frame, FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver)
+void UNDI_AndroidBPLibrary::NDI_Android_Receive_Frames(FNdiVideoReceived DelegateVideoReceived, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver)
 {
-	if (IsValid(In_NDI_Receiver) == false)
-	{
-		Out_Code = "NDI Receiver object is not valid.";
-
-		return false;
-	}
-
-	if (!In_NDI_Receiver->Receiver_Instance)
-	{
-		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
-
-		return false;
-	}
-
-	NDIlib_video_frame_v2_t Frame_Received;
-	NDIlib_recv_capture_v3(In_NDI_Receiver->Receiver_Instance, &Frame_Received, NULL, nullptr, 1000);
-
-	if (Frame_Received.data_size_in_bytes > 0)
-	{
-		if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVA)
+	AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived, &In_NDI_Receiver]()
 		{
-			Out_Code = "UYVA frame type doesn't supported.";
+			if (IsValid(In_NDI_Receiver) == false)
+			{
+				AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived]()
+					{
+						DelegateVideoReceived.Execute(false, nullptr, "NDI Receiver object is not valid.");
+						return;
+					}
+				);
+			}
 
-			return false;
+			if (!In_NDI_Receiver->Receiver_Instance)
+			{
+				AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived]()
+					{
+						DelegateVideoReceived.Execute(false, nullptr, "NDI Receiver Instance is not valid in NDI_Receiver object.");
+						return;
+					}
+				);
+			}
+
+			NDIlib_video_frame_v2_t Frame_Received;
+			NDIlib_recv_capture_v3(In_NDI_Receiver->Receiver_Instance, &Frame_Received, NULL, nullptr, 1000);
+
+			if (Frame_Received.data_size_in_bytes > 0)
+			{
+				if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVA)
+				{
+					AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived]()
+						{
+							DelegateVideoReceived.Execute(false, nullptr, "UYVA frame type doesn't supported.");
+							return;
+						}
+					);
+				}
+
+				else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVY)
+				{
+					AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived]()
+						{
+							DelegateVideoReceived.Execute(false, nullptr, "UYVY frame type doesn't supported.");
+							return;
+						}
+					);
+				}
+
+				else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_YV12)
+				{
+					AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived]()
+						{
+							DelegateVideoReceived.Execute(false, nullptr, "YV12 frame type doesn't supported.");
+							return;
+						}
+					);
+				}
+
+				else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRA)
+				{
+					UTexture2D* Frame = UNDI_AndroidBPLibrary::Callback_GenerateFrame(Frame_Received, In_NDI_Receiver->Receiver_Instance, PF_B8G8R8A8);
+					AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived, Frame]()
+						{
+							DelegateVideoReceived.ExecuteIfBound(true, Frame, "BGRA Frame successfully received.");
+							return;
+						}
+					);
+				}
+
+				else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRX)
+				{
+					UTexture2D* Frame = UNDI_AndroidBPLibrary::Callback_GenerateFrame(Frame_Received, In_NDI_Receiver->Receiver_Instance, PF_B8G8R8A8);
+					AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived, Frame]()
+						{
+							DelegateVideoReceived.ExecuteIfBound(true, Frame, "BGRX Frame successfully received.");
+							return;
+						}
+					);
+				}
+			}
+
+			else
+			{
+				NDIlib_recv_free_video_v2(In_NDI_Receiver->Receiver_Instance, &Frame_Received);
+				
+				AsyncTask(ENamedThreads::GameThread, [DelegateVideoReceived, &In_NDI_Receiver, &Frame_Received]()
+					{
+						DelegateVideoReceived.Execute(false, nullptr, "There is no \"video\" data to receive.");
+						return;
+					}
+				);
+			}
 		}
-
-		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_UYVY)
-		{
-			Out_Code = "UYVY frame type doesn't supported.";
-
-			return false;
-		}
-
-		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_YV12)
-		{
-			Out_Code = "YV12 frame type doesn't supported.";
-
-			return false;
-		}
-
-		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRA)
-		{
-			Out_Code = "BGRA Frame successfully received.";
-			Out_Frame = UNDI_AndroidBPLibrary::Callback_GenerateFrame(Frame_Received, In_NDI_Receiver->Receiver_Instance, PF_B8G8R8A8);
-
-			return true;
-		}
-
-		else if (Frame_Received.FourCC == NDIlib_FourCC_video_type_BGRX)
-		{
-			Out_Code = "BGRX Frame successfully received.";
-			Out_Frame = UNDI_AndroidBPLibrary::Callback_GenerateFrame(Frame_Received, In_NDI_Receiver->Receiver_Instance, PF_B8G8R8A8);
-
-			return true;
-		}
-	}
-
-	else
-	{
-		Out_Code = "There is no data to receive.";
-		NDIlib_recv_free_video_v2(In_NDI_Receiver->Receiver_Instance, &Frame_Received);
-
-		return false;
-	}
-
-	return true;
+	);
 }
 
 UTexture2D* UNDI_AndroidBPLibrary::Callback_GenerateFrame(NDIlib_video_frame_v2_t In_Frame_Received, NDIlib_recv_instance_t In_NDI_Receiver, EPixelFormat PixelFormat)
@@ -511,51 +567,79 @@ UTexture2D* UNDI_AndroidBPLibrary::Callback_GenerateFrame(NDIlib_video_frame_v2_
 	return Frame_Texture;
 }
 
-bool UNDI_AndroidBPLibrary::NDI_Android_Receive_Audio(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver)
+void UNDI_AndroidBPLibrary::NDI_Android_Receive_Audio(FNdiAudioReceived DelegateAudioReceived, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver)
 {
-	if (IsValid(In_NDI_Receiver) == false)
-	{
-		Out_Code = "NDI Receiver object is not valid.";
-
-		return false;
-	}
-
-	if (!In_NDI_Receiver->Receiver_Instance)
-	{
-		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
-
-		return false;
-	}
-
-	NDIlib_audio_frame_v3_t Audio_Received;
-	NDIlib_recv_capture_v3(In_NDI_Receiver->Receiver_Instance, NULL, &Audio_Received, nullptr, 1000);
-
-	if (Audio_Received.data_size_in_bytes > 0)
-	{
-		if (Audio_Received.FourCC == NDIlib_FourCC_audio_type_FLTP)
+	AsyncTask(ENamedThreads::AnyHiPriThreadHiPriTask, [DelegateAudioReceived, &In_NDI_Receiver]()
 		{
-			Out_Code = "UYVA frame type doesn't supported.";
+			if (IsValid(In_NDI_Receiver) == false)
+			{
+				AsyncTask(ENamedThreads::GameThread, [DelegateAudioReceived]()
+					{
+						FByteArray EmptyArray;
+						DelegateAudioReceived.Execute(false, EmptyArray, "NDI Receiver object is not valid.");
+						return;
+					}
+				);
+			}
 
-			return false;
+			if (!In_NDI_Receiver->Receiver_Instance)
+			{
+				AsyncTask(ENamedThreads::GameThread, [DelegateAudioReceived]()
+					{
+						FByteArray EmptyArray;
+						DelegateAudioReceived.Execute(false, EmptyArray, "NDI Receiver Instance is not valid in NDI_Receiver object.");
+						return;
+					}
+				);
+			}
+
+			NDIlib_audio_frame_v3_t Audio_Received;
+			NDIlib_recv_capture_v3(In_NDI_Receiver->Receiver_Instance, NULL, &Audio_Received, nullptr, 1000);
+
+			if (Audio_Received.data_size_in_bytes > 0)
+			{
+				if (Audio_Received.FourCC == NDIlib_FourCC_audio_type_FLTP)
+				{
+					FByteArray Audio_Buffer;
+					Audio_Buffer.Array_Bytes.SetNum(Audio_Received.data_size_in_bytes);
+					FMemory::Memcpy(Audio_Buffer.Array_Bytes.GetData(), Audio_Received.p_data, Audio_Received.data_size_in_bytes);
+					
+					AsyncTask(ENamedThreads::GameThread, [DelegateAudioReceived, Audio_Buffer]()
+						{
+							DelegateAudioReceived.ExecuteIfBound(true, Audio_Buffer, "NDIlib_FourCC_audio_type_FLTP successfully received.");
+							return;
+						}
+					);
+				}
+
+				else if (Audio_Received.FourCC == NDIlib_FourCC_audio_type_max)
+				{
+					FByteArray Audio_Buffer;
+					Audio_Buffer.Array_Bytes.SetNum(Audio_Received.data_size_in_bytes);
+					FMemory::Memcpy(Audio_Buffer.Array_Bytes.GetData(), Audio_Received.p_data, Audio_Received.data_size_in_bytes);
+					
+					AsyncTask(ENamedThreads::GameThread, [DelegateAudioReceived, Audio_Buffer]()
+						{
+							DelegateAudioReceived.ExecuteIfBound(true, Audio_Buffer, "NDIlib_FourCC_audio_type_max successfully received.");
+							return;
+						}
+					);
+				}
+			}
+
+			else
+			{
+				NDIlib_recv_free_audio_v3(In_NDI_Receiver->Receiver_Instance, &Audio_Received);
+				AsyncTask(ENamedThreads::GameThread, [DelegateAudioReceived]()
+					{
+						FByteArray EmptyArray;
+						DelegateAudioReceived.Execute(false, EmptyArray, "There is no \"audio\" data to receive.");
+						return;
+					}
+				);
+			}
 		}
-
-		else if (Audio_Received.FourCC == NDIlib_FourCC_audio_type_max)
-		{
-			Out_Code = "UYVY frame type doesn't supported.";
-
-			return false;
-		}
-	}
-
-	else
-	{
-		Out_Code = "There is no data to receive.";
-		NDIlib_recv_free_audio_v3(In_NDI_Receiver->Receiver_Instance, &Audio_Received);
-
-		return false;
-	}
-
-	return true;
+	);
 }
 
 bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, ENDI_KVM_Mouse MouseButton)
@@ -671,5 +755,323 @@ bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Position(FString& Out_Code, UP
 
 	NDIlib_recv_kvm_send_mouse_position(In_NDI_Receiver->Receiver_Instance, *Position);
 
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Wheel_Vertical(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, float MouseWheel)
+{
+	if (IsValid(In_NDI_Receiver) == false)
+	{
+		Out_Code = "NDI Receiver object is not valid.";
+
+		return false;
+	}
+
+	if (!In_NDI_Receiver->Receiver_Instance)
+	{
+		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
+
+		return false;
+	}
+
+	if (NDIlib_recv_kvm_is_supported(In_NDI_Receiver->Receiver_Instance) == false)
+	{
+		Out_Code = "KVM is not supported on source.";
+
+		return false;
+	}
+	
+	NDIlib_recv_kvm_send_vertical_mouse_wheel(In_NDI_Receiver->Receiver_Instance, MouseWheel);
+	
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Wheel_Horizontal(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, float MouseWheel)
+{
+	if (IsValid(In_NDI_Receiver) == false)
+	{
+		Out_Code = "NDI Receiver object is not valid.";
+
+		return false;
+	}
+
+	if (!In_NDI_Receiver->Receiver_Instance)
+	{
+		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
+
+		return false;
+	}
+
+	if (NDIlib_recv_kvm_is_supported(In_NDI_Receiver->Receiver_Instance) == false)
+	{
+		Out_Code = "KVM is not supported on source.";
+
+		return false;
+	}
+	
+	NDIlib_recv_kvm_send_horizontal_mouse_wheel(In_NDI_Receiver->Receiver_Instance, MouseWheel);
+
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Keyboard_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString Input)
+{
+	if (IsValid(In_NDI_Receiver) == false)
+	{
+		Out_Code = "NDI Receiver object is not valid.";
+
+		return false;
+	}
+
+	if (!In_NDI_Receiver->Receiver_Instance)
+	{
+		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
+
+		return false;
+	}
+
+	if (NDIlib_recv_kvm_is_supported(In_NDI_Receiver->Receiver_Instance) == false)
+	{
+		Out_Code = "KVM is not supported on source.";
+
+		return false;
+	}
+
+	TMap<FString, int32> MAP_Unicodes;
+
+	// Punctions
+	MAP_Unicodes.Add("\n", 10);		// Line Break
+	MAP_Unicodes.Add(" ", 32);		// Space
+	MAP_Unicodes.Add("!", 33);
+	MAP_Unicodes.Add("\"", 34);
+	MAP_Unicodes.Add("#", 35);
+	MAP_Unicodes.Add("$", 36);
+	MAP_Unicodes.Add("%", 37);
+	MAP_Unicodes.Add("&", 38);
+	MAP_Unicodes.Add("'", 39);
+	MAP_Unicodes.Add("(", 40);
+	MAP_Unicodes.Add(")", 41);
+	MAP_Unicodes.Add("*", 42);
+	MAP_Unicodes.Add("+", 43);
+	MAP_Unicodes.Add(",", 44);
+	MAP_Unicodes.Add("-", 45);
+	MAP_Unicodes.Add(".", 46);
+	MAP_Unicodes.Add("/", 47);
+
+	// Numbers
+	MAP_Unicodes.Add("0", 48);
+	MAP_Unicodes.Add("1", 49);
+	MAP_Unicodes.Add("2", 50);
+	MAP_Unicodes.Add("3", 51);
+	MAP_Unicodes.Add("4", 52);
+	MAP_Unicodes.Add("5", 53);
+	MAP_Unicodes.Add("6", 54);
+	MAP_Unicodes.Add("7", 55);
+	MAP_Unicodes.Add("8", 56);
+	MAP_Unicodes.Add("9", 57);
+
+	// Uppercase
+	MAP_Unicodes.Add("A", 65);
+	MAP_Unicodes.Add("B", 66);
+	MAP_Unicodes.Add("C", 67);
+	MAP_Unicodes.Add("D", 68);
+	MAP_Unicodes.Add("E", 69);
+	MAP_Unicodes.Add("F", 70);
+	MAP_Unicodes.Add("G", 71);
+	MAP_Unicodes.Add("H", 72);
+	MAP_Unicodes.Add("I", 73);
+	MAP_Unicodes.Add("J", 74);
+	MAP_Unicodes.Add("K", 75);
+	MAP_Unicodes.Add("L", 76);
+	MAP_Unicodes.Add("M", 77);
+	MAP_Unicodes.Add("N", 78);
+	MAP_Unicodes.Add("O", 79);
+	MAP_Unicodes.Add("P", 80);
+	MAP_Unicodes.Add("Q", 81);
+	MAP_Unicodes.Add("R", 82);
+	MAP_Unicodes.Add("S", 83);
+	MAP_Unicodes.Add("T", 84);
+	MAP_Unicodes.Add("U", 85);
+	MAP_Unicodes.Add("V", 86);
+	MAP_Unicodes.Add("W", 87);
+	MAP_Unicodes.Add("X", 88);
+	MAP_Unicodes.Add("Y", 89);
+	MAP_Unicodes.Add("Z", 90);
+
+	// Lowercase
+	MAP_Unicodes.Add("a", 97);
+	MAP_Unicodes.Add("b", 98);
+	MAP_Unicodes.Add("c", 99);
+	MAP_Unicodes.Add("d", 100);
+	MAP_Unicodes.Add("e", 101);
+	MAP_Unicodes.Add("f", 102);
+	MAP_Unicodes.Add("g", 103);
+	MAP_Unicodes.Add("h", 104);
+	MAP_Unicodes.Add("i", 105);
+	MAP_Unicodes.Add("j", 106);
+	MAP_Unicodes.Add("k", 107);
+	MAP_Unicodes.Add("l", 108);
+	MAP_Unicodes.Add("m", 109);
+	MAP_Unicodes.Add("n", 110);
+	MAP_Unicodes.Add("o", 111);
+	MAP_Unicodes.Add("p", 112);
+	MAP_Unicodes.Add("q", 113);
+	MAP_Unicodes.Add("r", 114);
+	MAP_Unicodes.Add("s", 115);
+	MAP_Unicodes.Add("t", 116);
+	MAP_Unicodes.Add("u", 117);
+	MAP_Unicodes.Add("v", 118);
+	MAP_Unicodes.Add("w", 119);
+	MAP_Unicodes.Add("x", 120);
+	MAP_Unicodes.Add("y", 121);
+	MAP_Unicodes.Add("z", 122);
+
+	NDIlib_recv_kvm_send_keyboard_press(In_NDI_Receiver->Receiver_Instance, *MAP_Unicodes.Find(Input));
+
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Keyboard_Release(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString Input)
+{
+	if (IsValid(In_NDI_Receiver) == false)
+	{
+		Out_Code = "NDI Receiver object is not valid.";
+
+		return false;
+	}
+
+	if (!In_NDI_Receiver->Receiver_Instance)
+	{
+		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
+
+		return false;
+	}
+
+	if (NDIlib_recv_kvm_is_supported(In_NDI_Receiver->Receiver_Instance) == false)
+	{
+		Out_Code = "KVM is not supported on source.";
+
+		return false;
+	}
+
+	TMap<FString, int32> MAP_Unicodes;
+
+	// Punctions
+	MAP_Unicodes.Add("\n", 10);		// Line Break
+	MAP_Unicodes.Add(" ", 32);		// Space
+	MAP_Unicodes.Add("!", 33);
+	MAP_Unicodes.Add("\"", 34);
+	MAP_Unicodes.Add("#", 35);
+	MAP_Unicodes.Add("$", 36);
+	MAP_Unicodes.Add("%", 37);
+	MAP_Unicodes.Add("&", 38);
+	MAP_Unicodes.Add("'", 39);
+	MAP_Unicodes.Add("(", 40);
+	MAP_Unicodes.Add(")", 41);
+	MAP_Unicodes.Add("*", 42);
+	MAP_Unicodes.Add("+", 43);
+	MAP_Unicodes.Add(",", 44);
+	MAP_Unicodes.Add("-", 45);
+	MAP_Unicodes.Add(".", 46);
+	MAP_Unicodes.Add("/", 47);
+
+	// Numbers
+	MAP_Unicodes.Add("0", 48);
+	MAP_Unicodes.Add("1", 49);
+	MAP_Unicodes.Add("2", 50);
+	MAP_Unicodes.Add("3", 51);
+	MAP_Unicodes.Add("4", 52);
+	MAP_Unicodes.Add("5", 53);
+	MAP_Unicodes.Add("6", 54);
+	MAP_Unicodes.Add("7", 55);
+	MAP_Unicodes.Add("8", 56);
+	MAP_Unicodes.Add("9", 57);
+
+	// Uppercase
+	MAP_Unicodes.Add("A", 65);
+	MAP_Unicodes.Add("B", 66);
+	MAP_Unicodes.Add("C", 67);
+	MAP_Unicodes.Add("D", 68);
+	MAP_Unicodes.Add("E", 69);
+	MAP_Unicodes.Add("F", 70);
+	MAP_Unicodes.Add("G", 71);
+	MAP_Unicodes.Add("H", 72);
+	MAP_Unicodes.Add("I", 73);
+	MAP_Unicodes.Add("J", 74);
+	MAP_Unicodes.Add("K", 75);
+	MAP_Unicodes.Add("L", 76);
+	MAP_Unicodes.Add("M", 77);
+	MAP_Unicodes.Add("N", 78);
+	MAP_Unicodes.Add("O", 79);
+	MAP_Unicodes.Add("P", 80);
+	MAP_Unicodes.Add("Q", 81);
+	MAP_Unicodes.Add("R", 82);
+	MAP_Unicodes.Add("S", 83);
+	MAP_Unicodes.Add("T", 84);
+	MAP_Unicodes.Add("U", 85);
+	MAP_Unicodes.Add("V", 86);
+	MAP_Unicodes.Add("W", 87);
+	MAP_Unicodes.Add("X", 88);
+	MAP_Unicodes.Add("Y", 89);
+	MAP_Unicodes.Add("Z", 90);
+
+	// Lowercase
+	MAP_Unicodes.Add("a", 97);
+	MAP_Unicodes.Add("b", 98);
+	MAP_Unicodes.Add("c", 99);
+	MAP_Unicodes.Add("d", 100);
+	MAP_Unicodes.Add("e", 101);
+	MAP_Unicodes.Add("f", 102);
+	MAP_Unicodes.Add("g", 103);
+	MAP_Unicodes.Add("h", 104);
+	MAP_Unicodes.Add("i", 105);
+	MAP_Unicodes.Add("j", 106);
+	MAP_Unicodes.Add("k", 107);
+	MAP_Unicodes.Add("l", 108);
+	MAP_Unicodes.Add("m", 109);
+	MAP_Unicodes.Add("n", 110);
+	MAP_Unicodes.Add("o", 111);
+	MAP_Unicodes.Add("p", 112);
+	MAP_Unicodes.Add("q", 113);
+	MAP_Unicodes.Add("r", 114);
+	MAP_Unicodes.Add("s", 115);
+	MAP_Unicodes.Add("t", 116);
+	MAP_Unicodes.Add("u", 117);
+	MAP_Unicodes.Add("v", 118);
+	MAP_Unicodes.Add("w", 119);
+	MAP_Unicodes.Add("x", 120);
+	MAP_Unicodes.Add("y", 121);
+	MAP_Unicodes.Add("z", 122);
+
+	NDIlib_recv_kvm_send_keyboard_release(In_NDI_Receiver->Receiver_Instance, *MAP_Unicodes.Find(Input));
+
+	return true;
+}
+
+bool UNDI_AndroidBPLibrary::NDI_Android_KVM_Clipboard_Send(FString& Out_Code, UPARAM(ref)UNDI_Android_Receiver*& In_NDI_Receiver, FString ClipboardContent)
+{
+	if (IsValid(In_NDI_Receiver) == false)
+	{
+		Out_Code = "NDI Receiver object is not valid.";
+
+		return false;
+	}
+
+	if (!In_NDI_Receiver->Receiver_Instance)
+	{
+		Out_Code = "NDIlib_recv_create_v4 is not valid in NDI_Receiver object.";
+
+		return false;
+	}
+
+	if (NDIlib_recv_kvm_is_supported(In_NDI_Receiver->Receiver_Instance) == false)
+	{
+		Out_Code = "KVM is not supported on source.";
+
+		return false;
+	}
+
+	NDIlib_recv_kvm_send_clipboard_contents(In_NDI_Receiver->Receiver_Instance, TCHAR_TO_UTF8(*ClipboardContent));
+	
 	return true;
 }

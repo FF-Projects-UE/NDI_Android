@@ -26,9 +26,82 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	NDI_ANDROID_API UClass* Z_Construct_UClass_UNDI_AndroidBPLibrary_NoRegister();
 	NDI_ANDROID_API UEnum* Z_Construct_UEnum_NDI_Android_ENDI_KVM_Mouse();
 	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_DelegateNdiFound__DelegateSignature();
+	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature();
+	NDI_ANDROID_API UFunction* Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature();
+	NDI_ANDROID_API UScriptStruct* Z_Construct_UScriptStruct_FByteArray();
 	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NDI_Android();
 // End Cross Module References
+	static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_ByteArray;
+class UScriptStruct* FByteArray::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_ByteArray.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_ByteArray.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FByteArray, Z_Construct_UPackage__Script_NDI_Android(), TEXT("ByteArray"));
+	}
+	return Z_Registration_Info_UScriptStruct_ByteArray.OuterSingleton;
+}
+template<> NDI_ANDROID_API UScriptStruct* StaticStruct<FByteArray>()
+{
+	return FByteArray::StaticStruct();
+}
+	struct Z_Construct_UScriptStruct_FByteArray_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[];
+#endif
+		static void* NewStructOps();
+		static const UECodeGen_Private::FBytePropertyParams NewProp_Array_Bytes_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Array_Bytes_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_Array_Bytes;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+		static const UECodeGen_Private::FStructParams ReturnStructParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FByteArray_Statics::Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	void* Z_Construct_UScriptStruct_FByteArray_Statics::NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FByteArray>();
+	}
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes_Inner = { "Array_Bytes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes_MetaData[] = {
+		{ "Category", "ByteArray" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes = { "Array_Bytes", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FByteArray, Array_Bytes), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FByteArray_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FByteArray_Statics::NewProp_Array_Bytes,
+	};
+	const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FByteArray_Statics::ReturnStructParams = {
+		(UObject* (*)())Z_Construct_UPackage__Script_NDI_Android,
+		nullptr,
+		&NewStructOps,
+		"ByteArray",
+		sizeof(FByteArray),
+		alignof(FByteArray),
+		Z_Construct_UScriptStruct_FByteArray_Statics::PropPointers,
+		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FByteArray_Statics::PropPointers),
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		EStructFlags(0x00000001),
+		METADATA_PARAMS(Z_Construct_UScriptStruct_FByteArray_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FByteArray_Statics::Struct_MetaDataParams))
+	};
+	UScriptStruct* Z_Construct_UScriptStruct_FByteArray()
+	{
+		if (!Z_Registration_Info_UScriptStruct_ByteArray.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_ByteArray.InnerSingleton, Z_Construct_UScriptStruct_FByteArray_Statics::ReturnStructParams);
+		}
+		return Z_Registration_Info_UScriptStruct_ByteArray.InnerSingleton;
+	}
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_ENDI_KVM_Mouse;
 	static UEnum* ENDI_KVM_Mouse_StaticEnum()
 	{
@@ -327,6 +400,146 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics
+	{
+		struct _Script_NDI_Android_eventNdiVideoReceived_Parms
+		{
+			bool bIsSuccessfull;
+			UTexture2D* Out_T2D;
+			FString Out_Code;
+		};
+		static void NewProp_bIsSuccessfull_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsSuccessfull;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_T2D;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull_SetBit(void* Obj)
+	{
+		((_Script_NDI_Android_eventNdiVideoReceived_Parms*)Obj)->bIsSuccessfull = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull = { "bIsSuccessfull", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(_Script_NDI_Android_eventNdiVideoReceived_Parms), &Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_Out_T2D = { "Out_T2D", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_NDI_Android_eventNdiVideoReceived_Parms, Out_T2D), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_NDI_Android_eventNdiVideoReceived_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_Out_T2D,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::NewProp_Out_Code,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_NDI_Android, nullptr, "NdiVideoReceived__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::_Script_NDI_Android_eventNdiVideoReceived_Parms), Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00120004, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics
+	{
+		struct _Script_NDI_Android_eventNdiAudioReceived_Parms
+		{
+			bool bIsSuccessfull;
+			FByteArray Out_Audio_Buffer;
+			FString Out_Code;
+		};
+		static void NewProp_bIsSuccessfull_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsSuccessfull;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Out_Audio_Buffer;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull_SetBit(void* Obj)
+	{
+		((_Script_NDI_Android_eventNdiAudioReceived_Parms*)Obj)->bIsSuccessfull = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull = { "bIsSuccessfull", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(_Script_NDI_Android_eventNdiAudioReceived_Parms), &Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_Out_Audio_Buffer = { "Out_Audio_Buffer", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_NDI_Android_eventNdiAudioReceived_Parms, Out_Audio_Buffer), Z_Construct_UScriptStruct_FByteArray, METADATA_PARAMS(nullptr, 0) }; // 42495138
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_NDI_Android_eventNdiAudioReceived_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_bIsSuccessfull,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_Out_Audio_Buffer,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::NewProp_Out_Code,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_NDI_Android, nullptr, "NdiAudioReceived__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::_Script_NDI_Android_eventNdiAudioReceived_Parms), Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00120004, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Clipboard_Send)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
+		P_GET_PROPERTY(FStrProperty,Z_Param_ClipboardContent);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_KVM_Clipboard_Send(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver,Z_Param_ClipboardContent);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Keyboard_Release)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
+		P_GET_PROPERTY(FStrProperty,Z_Param_Input);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_KVM_Keyboard_Release(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver,Z_Param_Input);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Keyboard_Send)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
+		P_GET_PROPERTY(FStrProperty,Z_Param_Input);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_KVM_Keyboard_Send(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver,Z_Param_Input);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Wheel_Horizontal)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_MouseWheel);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Wheel_Horizontal(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver,Z_Param_MouseWheel);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Wheel_Vertical)
+	{
+		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_MouseWheel);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_KVM_Mouse_Wheel_Vertical(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver,Z_Param_MouseWheel);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Position)
 	{
 		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
@@ -359,21 +572,20 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	}
 	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_Receive_Audio)
 	{
-		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_PROPERTY(FDelegateProperty,Z_Param_DelegateAudioReceived);
 		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_Receive_Audio(Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver);
+		UNDI_AndroidBPLibrary::NDI_Android_Receive_Audio(FNdiAudioReceived(Z_Param_DelegateAudioReceived),Z_Param_Out_In_NDI_Receiver);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_Receive_Frames)
 	{
-		P_GET_OBJECT_REF(UTexture2D,Z_Param_Out_Out_Frame);
-		P_GET_PROPERTY_REF(FStrProperty,Z_Param_Out_Out_Code);
+		P_GET_PROPERTY(FDelegateProperty,Z_Param_DelegateVideoReceived);
 		P_GET_OBJECT_REF(UNDI_Android_Receiver,Z_Param_Out_In_NDI_Receiver);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UNDI_AndroidBPLibrary::NDI_Android_Receive_Frames(Z_Param_Out_Out_Frame,Z_Param_Out_Out_Code,Z_Param_Out_In_NDI_Receiver);
+		UNDI_AndroidBPLibrary::NDI_Android_Receive_Frames(FNdiVideoReceived(Z_Param_DelegateVideoReceived),Z_Param_Out_In_NDI_Receiver);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UNDI_AndroidBPLibrary::execNDI_Android_Receiver_Release)
@@ -510,9 +722,14 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "NDI_Android_Find", &UNDI_AndroidBPLibrary::execNDI_Android_Find },
 			{ "NDI_Android_Init", &UNDI_AndroidBPLibrary::execNDI_Android_Init },
+			{ "NDI_Android_KVM_Clipboard_Send", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Clipboard_Send },
+			{ "NDI_Android_KVM_Keyboard_Release", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Keyboard_Release },
+			{ "NDI_Android_KVM_Keyboard_Send", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Keyboard_Send },
 			{ "NDI_Android_KVM_Mouse_Position", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Position },
 			{ "NDI_Android_KVM_Mouse_Release", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Release },
 			{ "NDI_Android_KVM_Mouse_Send", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Send },
+			{ "NDI_Android_KVM_Mouse_Wheel_Horizontal", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Wheel_Horizontal },
+			{ "NDI_Android_KVM_Mouse_Wheel_Vertical", &UNDI_AndroidBPLibrary::execNDI_Android_KVM_Mouse_Wheel_Vertical },
 			{ "NDI_Android_Receive_Audio", &UNDI_AndroidBPLibrary::execNDI_Android_Receive_Audio },
 			{ "NDI_Android_Receive_Frames", &UNDI_AndroidBPLibrary::execNDI_Android_Receive_Frames },
 			{ "NDI_Android_Receiver_Create", &UNDI_AndroidBPLibrary::execNDI_Android_Receiver_Create },
@@ -615,6 +832,162 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms
+		{
+			FString Out_Code;
+			UNDI_Android_Receiver* In_NDI_Receiver;
+			FString ClipboardContent;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_ClipboardContent;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ClipboardContent = { "ClipboardContent", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms, ClipboardContent), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_In_NDI_Receiver,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ClipboardContent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|KVM" },
+		{ "DisplayName", "NDI Android Send Clipboard" },
+		{ "Keywords", "ndi, android, kvm, clipboard, send" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_KVM_Clipboard_Send", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::NDI_AndroidBPLibrary_eventNDI_Android_KVM_Clipboard_Send_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms
+		{
+			FString Out_Code;
+			UNDI_Android_Receiver* In_NDI_Receiver;
+			FString Input;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Input;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_Input = { "Input", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms, Input), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_In_NDI_Receiver,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_Input,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|KVM" },
+		{ "DisplayName", "NDI Android Release Keyboard" },
+		{ "Keywords", "ndi, android, kvm, keyboard, release" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_KVM_Keyboard_Release", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Release_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms
+		{
+			FString Out_Code;
+			UNDI_Android_Receiver* In_NDI_Receiver;
+			FString Input;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Input;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_Input = { "Input", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms, Input), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_In_NDI_Receiver,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_Input,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|KVM" },
+		{ "DisplayName", "NDI Android Send Keyboard" },
+		{ "Keywords", "ndi, android, kvm, keyboard, send" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_KVM_Keyboard_Send", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::NDI_AndroidBPLibrary_eventNDI_Android_KVM_Keyboard_Send_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Position_Statics
 	{
 		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Position_Parms
@@ -651,7 +1024,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Position_Statics::Function_MetaDataParams[] = {
-		{ "Category", "NDI_Android|KVM" },
+		{ "Category", "NDI_Android|KVM|Mouse" },
 		{ "DisplayName", "NDI Android Send Mouse Position" },
 		{ "Keywords", "ndi, android, kvm, mouse, position" },
 		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
@@ -706,7 +1079,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Release_Statics::Function_MetaDataParams[] = {
-		{ "Category", "NDI_Android|KVM" },
+		{ "Category", "NDI_Android|KVM|Mouse" },
 		{ "DisplayName", "NDI Android Release Mouse Button" },
 		{ "Keywords", "ndi, android, kvm, mouse, release" },
 		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
@@ -761,7 +1134,7 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Send_Statics::Function_MetaDataParams[] = {
-		{ "Category", "NDI_Android|KVM" },
+		{ "Category", "NDI_Android|KVM|Mouse" },
 		{ "DisplayName", "NDI Android Send Mouse Button" },
 		{ "Keywords", "ndi, android, kvm, mouse, send" },
 		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
@@ -777,16 +1150,18 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics
 	{
-		struct NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms
+		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms
 		{
 			FString Out_Code;
 			UNDI_Android_Receiver* In_NDI_Receiver;
+			float MouseWheel;
 			bool ReturnValue;
 		};
 		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_MouseWheel;
 		static void NewProp_ReturnValue_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -795,23 +1170,116 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_MouseWheel = { "MouseWheel", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms, MouseWheel), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
-		((NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms*)Obj)->ReturnValue = 1;
+		((NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms*)Obj)->ReturnValue = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_In_NDI_Receiver,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_MouseWheel,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|KVM|Mouse" },
+		{ "DisplayName", "NDI Android Send Mouse Wheel Horizontal" },
+		{ "Keywords", "ndi, android, kvm, mouse, wheel, horizontal" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_KVM_Mouse_Wheel_Horizontal", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Horizontal_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms
+		{
+			FString Out_Code;
+			UNDI_Android_Receiver* In_NDI_Receiver;
+			float MouseWheel;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_MouseWheel;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_MouseWheel = { "MouseWheel", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms, MouseWheel), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_In_NDI_Receiver,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_MouseWheel,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NDI_Android|KVM|Mouse" },
+		{ "DisplayName", "NDI Android Send Mouse Wheel Vertical" },
+		{ "Keywords", "ndi, android, kvm, mouse, wheel, vertical" },
+		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNDI_AndroidBPLibrary, nullptr, "NDI_Android_KVM_Mouse_Wheel_Vertical", nullptr, nullptr, sizeof(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::NDI_AndroidBPLibrary_eventNDI_Android_KVM_Mouse_Wheel_Vertical_Parms), Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics
+	{
+		struct NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms
+		{
+			FScriptDelegate DelegateAudioReceived;
+			UNDI_Android_Receiver* In_NDI_Receiver;
+		};
+		static const UECodeGen_Private::FDelegatePropertyParams NewProp_DelegateAudioReceived;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FDelegatePropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_DelegateAudioReceived = { "DelegateAudioReceived", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Delegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms, DelegateAudioReceived), Z_Construct_UDelegateFunction_NDI_Android_NdiAudioReceived__DelegateSignature, METADATA_PARAMS(nullptr, 0) }; // 697845846
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Audio_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_DelegateAudioReceived,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_In_NDI_Receiver,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio_Statics::Function_MetaDataParams[] = {
 		{ "Category", "NDI_Android|Receive" },
 		{ "DisplayName", "NDI Android Receive Audio (Exprimental)" },
-		{ "Keywords", "ndi, android, receive, receiver, video, frame" },
+		{ "Keywords", "ndi, android, receive, receiver, audio, frame" },
 		{ "ModuleRelativePath", "Public/NDI_AndroidBPLibrary.h" },
 	};
 #endif
@@ -829,35 +1297,22 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	{
 		struct NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms
 		{
-			UTexture2D* Out_Frame;
-			FString Out_Code;
+			FScriptDelegate DelegateVideoReceived;
 			UNDI_Android_Receiver* In_NDI_Receiver;
-			bool ReturnValue;
 		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_Frame;
-		static const UECodeGen_Private::FStrPropertyParams NewProp_Out_Code;
+		static const UECodeGen_Private::FDelegatePropertyParams NewProp_DelegateVideoReceived;
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_NDI_Receiver;
-		static void NewProp_ReturnValue_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_Out_Frame = { "Out_Frame", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms, Out_Frame), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_Out_Code = { "Out_Code", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms, Out_Code), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FDelegatePropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_DelegateVideoReceived = { "DelegateVideoReceived", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Delegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms, DelegateVideoReceived), Z_Construct_UDelegateFunction_NDI_Android_NdiVideoReceived__DelegateSignature, METADATA_PARAMS(nullptr, 0) }; // 3842930364
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_In_NDI_Receiver = { "In_NDI_Receiver", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms, In_NDI_Receiver), Z_Construct_UClass_UNDI_Android_Receiver_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	void Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_ReturnValue_SetBit(void* Obj)
-	{
-		((NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms*)Obj)->ReturnValue = 1;
-	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(NDI_AndroidBPLibrary_eventNDI_Android_Receive_Frames_Parms), &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_Out_Frame,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_Out_Code,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_DelegateVideoReceived,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_In_NDI_Receiver,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames_Statics::Function_MetaDataParams[] = {
@@ -1465,11 +1920,16 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UNDI_AndroidBPLibrary_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Find, "NDI_Android_Find" }, // 1893408504
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Init, "NDI_Android_Init" }, // 643413139
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Position, "NDI_Android_KVM_Mouse_Position" }, // 3775737923
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Release, "NDI_Android_KVM_Mouse_Release" }, // 2281603277
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Send, "NDI_Android_KVM_Mouse_Send" }, // 220951594
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio, "NDI_Android_Receive_Audio" }, // 166675824
-		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames, "NDI_Android_Receive_Frames" }, // 1424599975
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Clipboard_Send, "NDI_Android_KVM_Clipboard_Send" }, // 4028664827
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Release, "NDI_Android_KVM_Keyboard_Release" }, // 2418950034
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Keyboard_Send, "NDI_Android_KVM_Keyboard_Send" }, // 863185063
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Position, "NDI_Android_KVM_Mouse_Position" }, // 2201396371
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Release, "NDI_Android_KVM_Mouse_Release" }, // 4181338868
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Send, "NDI_Android_KVM_Mouse_Send" }, // 1578727145
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Horizontal, "NDI_Android_KVM_Mouse_Wheel_Horizontal" }, // 3875169687
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_KVM_Mouse_Wheel_Vertical, "NDI_Android_KVM_Mouse_Wheel_Vertical" }, // 215052439
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Audio, "NDI_Android_Receive_Audio" }, // 3115638802
+		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receive_Frames, "NDI_Android_Receive_Frames" }, // 4150796318
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receiver_Create, "NDI_Android_Receiver_Create" }, // 1033854337
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Receiver_Release, "NDI_Android_Receiver_Release" }, // 3722543609
 		{ &Z_Construct_UFunction_UNDI_AndroidBPLibrary_NDI_Android_Release, "NDI_Android_Release" }, // 2380939505
@@ -1523,19 +1983,23 @@ void EmptyLinkFunctionForGeneratedCodeNDI_AndroidBPLibrary() {}
 	struct Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics
 	{
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
+		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::EnumInfo[] = {
 		{ ENDI_KVM_Mouse_StaticEnum, TEXT("ENDI_KVM_Mouse"), &Z_Registration_Info_UEnum_ENDI_KVM_Mouse, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3644143910U) },
 	};
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ScriptStructInfo[] = {
+		{ FByteArray::StaticStruct, Z_Construct_UScriptStruct_FByteArray_Statics::NewStructOps, TEXT("ByteArray"), &Z_Registration_Info_UScriptStruct_ByteArray, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FByteArray), 42495138U) },
+	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UNDI_Android_Sender, UNDI_Android_Sender::StaticClass, TEXT("UNDI_Android_Sender"), &Z_Registration_Info_UClass_UNDI_Android_Sender, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Sender), 174056774U) },
 		{ Z_Construct_UClass_UNDI_Android_Found, UNDI_Android_Found::StaticClass, TEXT("UNDI_Android_Found"), &Z_Registration_Info_UClass_UNDI_Android_Found, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Found), 3038918707U) },
 		{ Z_Construct_UClass_UNDI_Android_Receiver, UNDI_Android_Receiver::StaticClass, TEXT("UNDI_Android_Receiver"), &Z_Registration_Info_UClass_UNDI_Android_Receiver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_Android_Receiver), 3570776348U) },
-		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 4283242276U) },
+		{ Z_Construct_UClass_UNDI_AndroidBPLibrary, UNDI_AndroidBPLibrary::StaticClass, TEXT("UNDI_AndroidBPLibrary"), &Z_Registration_Info_UClass_UNDI_AndroidBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNDI_AndroidBPLibrary), 3214411554U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_1396230397(TEXT("/Script/NDI_Android"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_2637699527(TEXT("/Script/NDI_Android"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ClassInfo),
-		nullptr, 0,
+		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_NDI_Android_Source_NDI_Android_Public_NDI_AndroidBPLibrary_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
