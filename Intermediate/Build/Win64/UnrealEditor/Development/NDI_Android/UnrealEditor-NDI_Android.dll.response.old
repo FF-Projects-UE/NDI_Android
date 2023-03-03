@@ -46,6 +46,7 @@
 "..\Intermediate\Build\Win64\UnrealEditor\Development\MediaAssets\UnrealEditor-MediaAssets.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\RHI\UnrealEditor-RHI.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\RenderCore\UnrealEditor-RenderCore.lib"
+"..\Intermediate\Build\Win64\UnrealEditor\Development\UMG\UnrealEditor-UMG.lib"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
 "delayimp.lib"
 "wininet.lib"
